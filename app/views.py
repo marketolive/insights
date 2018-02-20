@@ -9,7 +9,7 @@ mpi_host = 'https://sj-ee-api.marketo.com'
 def _proxy_2(*args, **kwargs):
 	req = requests.request(
 		method=request.method,
-		url=request.url.replace('https://marketolive-proxy.herokuapp.com', mpi_host),
+		url=request.url.replace('http://marketolive-proxy.herokuapp.com', mpi_host),
 		headers={key: value for (key, value) in request.headers if key != 'Host'},
 		data=request.get_data(),
 		cookies=request.cookies)
