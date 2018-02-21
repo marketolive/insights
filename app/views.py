@@ -13,7 +13,7 @@ def test_page():
 def _proxy(*args, **kwargs):
 	resp = requests.request(
 		method=request.method,
-		url=request.url.replace('http', 'https'),
+		url=request.url.replace('http:', 'https:'),
 		headers={key: value for (key, value) in request.headers if key != 'Host'},
 		data=request.get_data(),
 		cookies=request.cookies,
