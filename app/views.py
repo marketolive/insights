@@ -1,8 +1,12 @@
 from app import app
-from flask import request, Response, redirect
+from flask import request, Response, redirect, render_template
 import os, requests, re
 
 mpi_host = 'https://sj-ee-api.marketo.com'
+
+@app.route('/test')
+def test_page():
+	return render_template('/test.html')
 
 @app.route('/')
 @app.route('/<path:path>')
