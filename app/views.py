@@ -10,17 +10,21 @@ import os, requests
 # Global Variables
 base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'static/json')
+json_resp_headers = {
+	'Content-Type': 'application/json; charset=UTF-8'
+}
 
 @app.before_request
 def before_request():
-	if (request.path in ['/mpi', '/marketo-performance', '/marketing-performance']):
-		mpi.getChannel = load(open(os.path.join(json_url, 'mpi.getChannel.json')))
-		mpi.getProgramRank = load(open(os.path.join(json_url, 'mpi.getProgramRank.json')))
-		mpi.getChannelTrend = load(open(os.path.join(json_url, 'mpi.getChannelTrend.json')))
-		mpi.filters = load(open(os.path.join(json_url, 'mpi.filters.json')))
-		mpi.quickcharts = load(open(os.path.join(json_url, 'mpi.quickcharts.json')))
-	elif (request.path == '/cmo/v1/metadata/export.json'):
-		return send_file('static/export/mpi-revenue _won_to_cost_ratio_mt-previous_year.pptx')
+	if (search('/cmo/v1/metadata/', request.path)):
+		if (request.path == '/cmo/v1/metadata/export.json'):
+			return send_file('static/export/mpi-revenue _won_to_cost_ratio_mt-previous_year.pptx')
+		else:
+			mpi.getChannel = load(open(os.path.join(json_url, 'mpi.getChannel.json')))
+			mpi.getProgramRank = load(open(os.path.join(json_url, 'mpi.getProgramRank.json')))
+			mpi.getChannelTrend = load(open(os.path.join(json_url, 'mpi.getChannelTrend.json')))
+			mpi.filters = load(open(os.path.join(json_url, 'mpi.filters.json')))
+			mpi.quickcharts = load(open(os.path.join(json_url, 'mpi.quickcharts.json')))
 	elif (request.path == '/cmo/v1/export/getExcelData.json'):
 		return send_file('static/export/mpi-revenue _won_to_cost_ratio_mt-previous_year.xlsx')
 
@@ -107,7 +111,7 @@ def mpi_endpoint(endpoint):
 		if (mode == 'bottom'):
 			resp['program'].reverse()
 		
-		return dumps(resp)
+		return dumps(resp), 200, json_resp_headers
 	
 	elif (endpoint in ['getProgramTagName', 'getWorkspace', 'getAbmAccountList', 'getCustomAttributeName', 'getOpportunityType']):
 		results_array = {
@@ -121,9 +125,9 @@ def mpi_endpoint(endpoint):
 		resp = deepcopy(mpi.filters[endpoint])
 		
 		if (page == '0'):
-			return dumps(resp)
+			return dumps(resp), 200, json_resp_headers
 		else:
-			return dumps({'success': 'true', 'count': resp['count']})
+			return dumps({'success': 'true', 'count': resp['count']}), 200, json_resp_headers
 	
 	elif (endpoint in ['getProgramTagValue', 'getCustomAttributeValue']):
 		results_array = {
@@ -135,21 +139,36 @@ def mpi_endpoint(endpoint):
 		resp = deepcopy(mpi.filters[endpoint][name])
 		
 		if (page == '0'):
-			return dumps(resp)
+			return dumps(resp), 200, json_resp_headers
 		else:
-			return dumps({'success': 'true', 'count': resp['count']})
+			return dumps({'success': 'true', 'count': resp['count']}), 200, json_resp_headers
 	
 	elif (endpoint == 'quickcharts'):
 		resp = deepcopy(mpi.quickcharts)
-		return dumps(resp)
+		return dumps(resp), 200, json_resp_headers
 	
 	elif (endpoint == 'getUser'):
-		return dumps({"munchkin_id":"000-AAA-000","customer_prefix":"mpi4marketolive","user_id":"mpi@marketolive.com"})
+		return dumps({"munchkin_id":"000-AAA-000","customer_prefix":"mpi4marketolive","user_id":"mpi@marketolive.com"}), 200, json_resp_headers
 	
 	elif (endpoint == '150'):
-		return dumps({})
+		return dumps({}), 200, json_resp_headers
 
 @app.route('/email')
 @app.route('/email-insights')
 def ei_page():
 	return render_template('ei.html')
+
+@app.after_request
+def add_header(response):
+	if (search('^application/json;?', response.headers['Content-Type'])):
+		response.headers['Cache-Control'] = 'public, max-age=28800'
+	elif (search('/?javascript;?', response.headers['Content-Type'])):
+		response.headers['Cache-Control'] = 'public, max-age=86400'
+	elif (search('^text/(html|css);?', response.headers['Content-Type'])):
+		response.headers['Cache-Control'] = 'public, max-age=86400'
+	elif (search('^image/', response.headers['Content-Type'])):
+		response.headers['Cache-Control'] = 'public, max-age=86400'
+	else:
+		response.headers['Cache-Control'] = 'public, max-age=86400'
+	
+	return response
