@@ -30140,7 +30140,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       getPPT: function(e) {
         var t = (0,
         f.getApiUrl)("getPPT", !1);
-        return d().callServer(t, "pptx", "POST", e, "text/html")
+        return d().callServer(t, "pptx", "GET", e, "text/html")
       },
       createQuickChart: function(e, t) {
         var r = (0,
