@@ -85,6 +85,7 @@ def mpi_endpoint(endpoint):
 			
 			if (endpoint == 'getChannel'):
 				resp['channel'] = []
+				mpi.channel_ids = []
 				
 				for channel in mpi.getChannel[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['channel']:
 					if (random() <= rand):
@@ -93,7 +94,9 @@ def mpi_endpoint(endpoint):
 					mpi.channel_ids.append(channel['id'])
 			
 			elif (endpoint == 'getProgramRank'):
-				resp['program'] = []
+				if (not resp['program']):
+					resp['program'] = []
+				
 				for program in mpi.getProgramRank[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['program']:
 					if (program['channelId'] in mpi.channel_ids):
 						resp['program'].append(program)
