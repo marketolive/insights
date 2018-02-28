@@ -1,6 +1,6 @@
 var prod = "3348268820",
 dev = "3598597352",
-env = dev,
+env = prod,
 
 HEAP = HEAP || {};
 
