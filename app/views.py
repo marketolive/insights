@@ -16,9 +16,9 @@ json_resp_headers = {
 
 @app.before_request
 def before_request():
-	if (search('/cmo/v1/metadata/', request.path)):
+	if (search('(^/cmo/v1/metadata/|^/mpi$|^/marketo-performance$|^/marketing-performance$)', request.path)):
 		if (request.path == '/cmo/v1/metadata/export.json'):
-			return send_file('static/export/mpi-revenue _won_to_cost_ratio_mt-previous_year.pptx')
+			return send_file('static/export/mpi-revenue_won_to_cost_ratio_mt-previous_year.pptx')
 		else:
 			mpi.getChannel = load(open(os.path.join(json_url, 'mpi.getChannel.json')))
 			mpi.getProgramRank = load(open(os.path.join(json_url, 'mpi.getProgramRank.json')))
@@ -26,7 +26,7 @@ def before_request():
 			mpi.filters = load(open(os.path.join(json_url, 'mpi.filters.json')))
 			mpi.quickcharts = load(open(os.path.join(json_url, 'mpi.quickcharts.json')))
 	elif (request.path == '/cmo/v1/export/getExcelData.json'):
-		return send_file('static/export/mpi-revenue _won_to_cost_ratio_mt-previous_year.xlsx')
+		return send_file('static/export/mpi-revenue_won_to_cost_ratio_mt-previous_year.xlsx')
 
 @app.route('/mpi')
 @app.route('/marketo-performance')
