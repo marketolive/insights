@@ -95,10 +95,10 @@ def mpi_endpoint(endpoint):
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
-				
+				print (mpi.channel_ids)
 				if (not channel_id):
 					resp['program'] = []
-					programs = deepcopy(mpi.getProgramRank[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['program'])
+					programs = mpi.getProgramRank[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['program']
 				else:
 					programs = deepcopy(resp['program'])
 				
