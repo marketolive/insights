@@ -4,6 +4,7 @@ from re import search
 from json import load, loads, dumps
 from random import randint, random
 from copy import deepcopy
+from time import sleep
 from globals import *
 import os, requests
 
@@ -92,7 +93,7 @@ def mpi_endpoint(endpoint):
 						resp['channel'].append(channel)
 						session['channel_ids_filtered'].append(channel['id'])
 						session.modified = True
-				print('/ngetChannel: channel_ids_filtered')
+				print('/n' + 'getChannel: channel_ids_filtered')
 				print(session['channel_ids_filtered'])
 			elif (endpoint == 'getProgramRank'):
 				programs = None
@@ -104,14 +105,13 @@ def mpi_endpoint(endpoint):
 					programs = deepcopy(resp['program'])
 					resp['program'] = []
 				
+				sleep(2)
 				for program in programs:
 					if (program['channelId'] in session['channel_ids_filtered']):
 						resp['program'].append(program)
-						print('\ngetProgramRank: programs selected channel ids')
-						print(program['channelId'])
 					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['program'].append(program)
-				print('\ngetProgramRank: channel_ids_filtered')
+				print('\n' + 'getProgramRank: channel_ids_filtered')
 				print(session['channel_ids_filtered'])
 			
 			elif (endpoint == 'getChannelTrend'):
