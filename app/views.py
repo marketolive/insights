@@ -1,10 +1,9 @@
 from app import app
-from flask import request, session, render_template, send_file, redirect
+from flask import request, render_template, send_file, redirect
 from re import search
 from json import load, loads, dumps
 from random import randint, random
 from copy import deepcopy
-from time import sleep
 from globals import *
 import os, requests
 
@@ -89,10 +88,6 @@ def mpi_endpoint(endpoint):
 				for channel in mpi.getChannel[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['channel']:
 					if (int(channel['id']) % mod == 0):
 						resp['channel'].append(channel)
-						if channel['id'] not in out:
-							out.append(channel['id'])
-				
-				print('getChannel:')
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
@@ -108,22 +103,13 @@ def mpi_endpoint(endpoint):
 				for program in programs:
 					if (int(program['channelId']) % mod == 0):
 						resp['program'].append(program)
-						if program['channelId'] not in out:
-							out.append(program['channelId'])
-				
-				print('getProgramRank:')
 			
 			elif (endpoint == 'getChannelTrend'):
 				resp['metric']['channel'] = []
 				for channelTrend in mpi.getChannelTrend[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['metric']['channel']:
 					if (int(channelTrend['id']) % mod == 0):
 						resp['metric']['channel'].append(channelTrend)
-						if channelTrend['id'] not in out:
-							out.append(channelTrend['id'])
-				
-				print('getChannelTrend:')
 			
-			print(out)
 		else:
 			session.pop('channel_ids_filtered', None)
 		
