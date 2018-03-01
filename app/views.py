@@ -86,17 +86,24 @@ def mpi_endpoint(endpoint):
 			
 			if (endpoint == 'getChannel'):
 				resp['channel'] = []
-				session['channel_ids_filtered'] = []
+				#session['channel_ids_filtered'] = []
 				
 				for channel in mpi.getChannel[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['channel']:
+					if (channel['id'] in session['channel_ids_filtered']):
+						resp['channel'].append(channel)
+					'''
 					if (random() <= rand):
 						resp['channel'].append(channel)
 						session['channel_ids_filtered'].append(channel['id'])
 						session.modified = True
-				print('/n' + 'getChannel: channel_ids_filtered')
+					'''
+				print('/n')
+				print('getChannel: channel_ids_filtered')
 				print(session['channel_ids_filtered'])
+			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
+				session['channel_ids_filtered'] = []
 				
 				if (not channel_id):
 					resp['program'] = []
@@ -105,13 +112,18 @@ def mpi_endpoint(endpoint):
 					programs = deepcopy(resp['program'])
 					resp['program'] = []
 				
-				sleep(2)
 				for program in programs:
+					if (random() <= rand):
+						session['channel_ids_filtered'].append(program['channelId'])
+						session.modified = True
+					'''
 					if (program['channelId'] in session['channel_ids_filtered']):
 						resp['program'].append(program)
 					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['program'].append(program)
-				print('\n' + 'getProgramRank: channel_ids_filtered')
+					'''
+				print('/n')
+				print('getProgramRank: channel_ids_filtered')
 				print(session['channel_ids_filtered'])
 			
 			elif (endpoint == 'getChannelTrend'):
