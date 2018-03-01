@@ -91,8 +91,8 @@ def mpi_endpoint(endpoint):
 				for channel in mpi.getChannel[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['channel']:
 					if (random() <= rand):
 						resp['channel'].append(channel)
-				for channel in resp['channel']:
-					session['channel_ids_filtered'].append(channel['id'])
+						session['channel_ids_filtered'].append(channel['id'])
+						print(session['channel_ids_filtered'])
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
