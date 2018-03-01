@@ -91,7 +91,6 @@ def mpi_endpoint(endpoint):
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
-				session['channel_ids_filtered'] = []
 				
 				if (not channel_id):
 					resp['program'] = []
@@ -109,9 +108,6 @@ def mpi_endpoint(endpoint):
 				for channelTrend in mpi.getChannelTrend[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['metric']['channel']:
 					if (int(channelTrend['id']) % mod == 0):
 						resp['metric']['channel'].append(channelTrend)
-			
-		else:
-			session.pop('channel_ids_filtered', None)
 		
 		if (mode == 'bottom'):
 			resp['program'].reverse()
