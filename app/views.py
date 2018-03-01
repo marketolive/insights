@@ -116,7 +116,12 @@ def mpi_endpoint(endpoint):
 						resp['metric']['channel'].append(program)
 					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['metric']['channel'].append(program)
-			
+			print('\n')
+			print(session['channel_ids_filtered'])
+			print('\n')
+		else:
+			session.pop('channel_ids_filtered', None)
+		
 		if (mode == 'bottom'):
 			resp['program'].reverse()
 		
