@@ -4,7 +4,7 @@ class mpi:
 	getChannelTrend = None
 	filters = None
 	quickcharts = None
-	channel_ids = None
+	channel_ids = []
 	
 	time_period_list = [
 		'currentMonth',
