@@ -93,7 +93,6 @@ def mpi_endpoint(endpoint):
 						resp['channel'].append(channel)
 				for channel in resp['channel']:
 					session['channel_ids_filtered'].append(channel['id'])
-					print(session['channel_ids_filtered'])
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
@@ -118,7 +117,6 @@ def mpi_endpoint(endpoint):
 					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['metric']['channel'].append(program)
 			
-			print(session['channel_ids_filtered'])
 		if (mode == 'bottom'):
 			resp['program'].reverse()
 		
