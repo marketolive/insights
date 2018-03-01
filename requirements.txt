@@ -1,5 +1,6 @@
 gunicorn
 Flask
+Flask-Session
 requests
 fake-useragent
 Flask-SSLify

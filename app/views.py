@@ -1,5 +1,5 @@
 from app import app
-from flask import request, render_template, send_file, redirect
+from flask import request, session, render_template, send_file, redirect
 from re import search
 from json import load, loads, dumps
 from random import randint, random
@@ -85,17 +85,18 @@ def mpi_endpoint(endpoint):
 			
 			if (endpoint == 'getChannel'):
 				resp['channel'] = []
-				mpi.channel_ids = []
+				session['channel_ids_filtered'] = []
+				session.modified = True
 				
 				for channel in mpi.getChannel[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['channel']:
 					if (random() <= rand):
 						resp['channel'].append(channel)
 				for channel in resp['channel']:
-					mpi.channel_ids.append(channel['id'])
+					session['channel_ids_filtered'].append(channel['id'])
 			
 			elif (endpoint == 'getProgramRank'):
 				programs = None
-				print (mpi.channel_ids)
+				
 				if (not channel_id):
 					resp['program'] = []
 					programs = mpi.getProgramRank[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['program']
@@ -103,19 +104,19 @@ def mpi_endpoint(endpoint):
 					programs = deepcopy(resp['program'])
 				
 				for program in programs:
-					if (program['channelId'] in mpi.channel_ids):
+					if (program['channelId'] in session['channel_ids_filtered']):
 						resp['program'].append(program)
-					elif (not mpi.channel_ids and random() <= rand):
+					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['program'].append(program)
 			
 			elif (endpoint == 'getChannelTrend'):
 				resp['metric']['channel'] = []
 				for channelTrend in mpi.getChannelTrend[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]['metric']['channel']:
-					if (channelTrend['id'] in mpi.channel_ids):
+					if (channelTrend['id'] in session['channel_ids_filtered']):
 						resp['metric']['channel'].append(program)
-					elif (not mpi.channel_ids and random() <= rand):
+					elif (not session['channel_ids_filtered'] and random() <= rand):
 						resp['metric']['channel'].append(program)
-						
+			
 		if (mode == 'bottom'):
 			resp['program'].reverse()
 		
