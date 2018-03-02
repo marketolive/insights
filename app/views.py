@@ -39,6 +39,11 @@ def before_request():
 	elif request.path == '/cmo/v1/export/getExcelData.json': # Returns static file for 'EXCEL Download'
 		return send_file('static/export/mpi-revenue_won_to_cost_ratio_mt-previous_year.xlsx')
 
+# Home Page
+@app.route('/')
+def home_page():
+	return redirect('/mpi')
+
 # MPI Page
 @app.route('/mpi')
 @app.route('/marketo-performance')
@@ -171,17 +176,26 @@ def mpi_endpoint(endpoint):
 def ei_page():
 	return render_template('ei.html')
 
+# Robots route set to disallow search engine indexing of all pages
+@app.route('/robots.txt')
+def robots():
+	return app.send_static_file('export/robots.txt')
+
 # Sets Cache-Control header based upon the Content-Type header
+'''
 @app.after_request
 def add_header(response):
 	if search('^application/json;?', response.headers['Content-Type']):
-		response.headers['Cache-Control'] = 'public, max-age=86400'
+		response.cache_control.public = True
+		response.cache_control.max_age = 86400
 	elif search('/?javascript;?', response.headers['Content-Type']):
-		response.headers['Cache-Control'] = 'public, max-age=86400'
+		response.cache_control.public = True
+		response.cache_control.max_age = 86400
 	elif search('^text/(html|css);?', response.headers['Content-Type']):
-		response.headers['Cache-Control'] = 'public, max-age=86400'
+		response.cache_control.public = True
+		response.cache_control.max_age = 86400
 	elif search('^image/', response.headers['Content-Type']):
-		response.headers['Cache-Control'] = 'public, max-age=86400'
-	else:
-		response.headers['Cache-Control'] = 'public, max-age=86400'
+		response.cache_control.public = True
+		response.cache_control.max_age = 86400
 	return response
+'''
