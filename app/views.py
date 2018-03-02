@@ -1,5 +1,5 @@
 from app import app
-from flask import request, render_template, send_file, redirect
+from flask import request, render_template, send_file, redirect, abort
 from re import search
 from json import load, loads, dumps
 from copy import deepcopy
@@ -9,6 +9,7 @@ import os, requests
 # Global Vars
 base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'static/json')
+resp_code = 200
 json_resp_headers = {
 	'Content-Type': 'application/json; charset=UTF-8'
 }
@@ -132,36 +133,37 @@ def mpi_endpoint(endpoint):
 			resp['program'].reverse()
 		
 		# Returns the data as JSON w/ 200 response and sets the Content-Type header
-		return dumps(resp), 200, json_resp_headers
+		return dumps(resp), None, json_resp_headers
 	
 	elif endpoint in ['getProgramTagName', 'getWorkspace', 'getAbmAccountList', 'getCustomAttributeName', 'getOpportunityType']:
 		page = request.args.get('page')
 		# If page is 0 then returns all the data for the selected filter as JSON and otherwise simply returns the count of the filter values
-		if (page == '0'):
-			return dumps(mpi.filters[endpoint]), 200, json_resp_headers
+		if page == '0':
+			return dumps(mpi.filters[endpoint]), None, json_resp_headers
 		else:
-			return dumps({'success': 'true', 'count': mpi.filters[endpoint]['count']}), 200, json_resp_headers
+			return dumps({'success': 'true', 'count': mpi.filters[endpoint]['count']}), None, json_resp_headers
 	
-	elif (endpoint in ['getProgramTagValue', 'getCustomAttributeValue']):
+	elif endpoint in ['getProgramTagValue', 'getCustomAttributeValue']:
 		name = request.args.get('name')
 		page = request.args.get('page')
 		# If page is 0 then returns all the data for the selected tag/attribute filter as JSON and otherwise simply returns the count of the tag/attribute values
-		if (page == '0'):
-			return dumps(mpi.filters[endpoint][name]), 200, json_resp_headers
+		if page == '0':
+			return dumps(mpi.filters[endpoint][name]), None, json_resp_headers
 		else:
-			return dumps({'success': 'true', 'count': mpi.filters[endpoint][name]['count']}), 200, json_resp_headers
+			return dumps({'success': 'true', 'count': mpi.filters[endpoint][name]['count']}), None, json_resp_headers
 	
-	elif (endpoint == 'quickcharts'):
-		return dumps(mpi.quickcharts), 200, json_resp_headers
+	elif endpoint == 'quickcharts':
+		return dumps(mpi.quickcharts), None, json_resp_headers
 	
-	elif (endpoint == 'getUser'):
-		return dumps({"munchkin_id":"000-AAA-000","customer_prefix":"mpi4marketolive","user_id":"mpi@marketolive.com"}), 200, json_resp_headers
+	elif endpoint == 'getUser':
+		return dumps({'munchkin_id':'000-AAA-000','customer_prefix':'mpi4marketolive','user_id':'mpi@marketolive.com'}), None, json_resp_headers
 	
 	# Returns empty JSON for endpoint which deletes a Quick Chart (header is 'DELETE')
-	'''
-	elif (endpoint == '150'):
-		return dumps({}), 200, json_resp_headers
-	'''
+	#elif (endpoint == '150'):
+	#	return dumps({}), 200, json_resp_headers
+	
+	else:
+		abort(404)
 
 # Email Insights Page
 @app.route('/email')
@@ -169,16 +171,16 @@ def mpi_endpoint(endpoint):
 def ei_page():
 	return render_template('ei.html')
 
-# Sets Cache-Control header specifically for Content-Type
+# Sets Cache-Control header based upon the Content-Type header
 @app.after_request
 def add_header(response):
-	if (search('^application/json;?', response.headers['Content-Type'])):
+	if search('^application/json;?', response.headers['Content-Type']):
 		response.headers['Cache-Control'] = 'public, max-age=86400'
-	elif (search('/?javascript;?', response.headers['Content-Type'])):
+	elif search('/?javascript;?', response.headers['Content-Type']):
 		response.headers['Cache-Control'] = 'public, max-age=86400'
-	elif (search('^text/(html|css);?', response.headers['Content-Type'])):
+	elif search('^text/(html|css);?', response.headers['Content-Type']):
 		response.headers['Cache-Control'] = 'public, max-age=86400'
-	elif (search('^image/', response.headers['Content-Type'])):
+	elif search('^image/', response.headers['Content-Type']):
 		response.headers['Cache-Control'] = 'public, max-age=86400'
 	else:
 		response.headers['Cache-Control'] = 'public, max-age=86400'
