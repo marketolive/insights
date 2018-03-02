@@ -6,8 +6,6 @@ app = Flask(__name__)
 # Support for sessions
 app.secret_key = '123123'
 app.config['SESSION_TYPE'] = 'filesystem'
-# Sets default cache_control.max_age
-app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 86400
 
 app.config.from_object('config')
 Session(app)

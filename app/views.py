@@ -182,7 +182,6 @@ def robots():
 	return app.send_static_file('export/robots.txt')
 
 # Sets Cache-Control header based upon the Content-Type header
-'''
 @app.after_request
 def add_header(response):
 	if search('^application/json;?', response.headers['Content-Type']):
@@ -197,5 +196,7 @@ def add_header(response):
 	elif search('^image/', response.headers['Content-Type']):
 		response.cache_control.public = True
 		response.cache_control.max_age = 86400
+	else:
+		response.cache_control.public = True
+		response.cache_control.max_age = 86400
 	return response
-'''
