@@ -14,14 +14,18 @@ json_resp_headers = {
 def home_page():
 	return redirect('/mpi')
 
-# MPI Page
+# MPI Default Page
 @app.route('/mpi')
-@app.route('/mpi/<jsonData>')
 @app.route('/marketo-performance')
-@app.route('/marketo-performance/<jsonData>')
 @app.route('/marketing-performance')
+def mpi_default_page():
+	return render_template('mpi.html')
+
+# MPI Custom Page
+@app.route('/mpi/<jsonData>')
+@app.route('/marketo-performance/<jsonData>')
 @app.route('/marketing-performance/<jsonData>')
-def mpi_page(jsonData):
+def mpi_custom_page(jsonData):
 	return render_template('mpi.html')
 
 #MPI JSON Endpoints
