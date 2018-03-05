@@ -1,9 +1,5 @@
 class mpi:
-	getChannel = None
-	getProgramRank = None
-	getChannelTrend = None
-	filters = None
-	quickcharts = None
+	getChannel = getProgramRank = getChannelTrend = getProgramTagName = getWorkspace = getAbmAccountList = getCustomAttributeName = getOpportunityType = getProgramTagValue = getCustomAttributeValue = quickcharts = None
 	
 	time_period_list = [
 		'currentMonth',

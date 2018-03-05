@@ -21854,7 +21854,14 @@ https://github.com/nodeca/pako/blob/master/LICENSE
     }
   },
   FN8c: function(e, t, r) {
-    //debugger;
+    let path_split = window.location.pathname.split('/'),
+    endpoint_root;
+    if ((path_split.length - 1) <= 1) {
+      endpoint_root = '/default';
+    } else {
+      endpoint_root = '/' + path_split[2];
+    }
+    
     "use strict";
     Object.defineProperty(t, "__esModule", {
       value: !0
@@ -21908,7 +21915,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
     t.IS_PRODUCTION = false);
     //t.IS_PRODUCTION = "localhost" !== window.location.hostname);
     t.API_SOURCE = n.BACKEND,
-    t.API_URL = window.location.origin + "/cmo/v1/",
+    t.API_URL = window.location.origin + endpoint_root + "/custom/cmo/v1/",
     t.DEV_COOKIE = "ids_sso_in=A2mzWEFmOeWKovWujoAMSsMXYWBVTOyxwcnykf7maWExl59kb-p45w4cgaYHWjfM6oYVjO8EeJBV3nfB-cGfpTiP0XYscqxAH7KjtvDx_N4:rcaprov2024_user1@marketo.com:14400:1494493255; path=/; domain=marketo.com; secure; httponly"
   },
   FRrH: function(e, t, r) {
