@@ -1,4 +1,4 @@
-from json import load, dumps
+from json import load, loads, dumps
 from copy import deepcopy
 import os
 
@@ -173,7 +173,7 @@ class mpi:
 	}
 	
 	# User selected a set of filters to segment the data via post-filtering
-	def filter_data(endpoint, filters, channel_id, data):
+	def filter_data(endpoint, filters, data):
 		# Counts the number of filters selected plus 1 to set a divisor used to determine if a channel id is an even multiple
 		# Ensures that subset of programs returned are part of the subset of channels returned and are decreasing in size as the number of filters increases
 		num_of_filters = sum(filter is not None for filter in filters)
@@ -188,16 +188,8 @@ class mpi:
 						data['channel'].append(channel)
 			
 			elif endpoint == 'getProgramRank.json':
-				programs = items['program']
 				data['program'] = []
-				# If user selected a set of channels then use that subset of programs to segment
-				if not channel_id:
-					data['program'] = []
-					programs = items['program']
-				else:
-					programs = deepcopy(data['program'])
-					data['program'] = []
-				for program in programs:
+				for program in items['program']:
 					if int(program['channelId']) % mod == 0:
 						data['program'].append(program)
 			
@@ -210,14 +202,16 @@ class mpi:
 			return data
 		return data
 	
-	# 
+	# Handles getChannel, getProgramRank, getProgram, getChannelTrend
 	def get_data(request):
 		# Loads the appropriate JSON data file
 		path_split = request.path.rpartition('/')
 		endpoint = path_split[len(path_split) - 1]
+		jsonData = request.args.get('jsonData') or 'default'
 		if endpoint == 'getProgram.json':
 			endpoint = 'getProgramRank.json'
-		data = load(open(os.path.join(json_url, 'mpi.' + endpoint)))
+		
+		data = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
 		
 		# Required query string parameters
 		sidebar = request.args.get('sidebar')
@@ -246,7 +240,18 @@ class mpi:
 		# Sets settings based upon the selected metric and setting as some settings have no effect on the data for the metric selected
 		settings = mpi.settings_dict[top_view_metrics][settings]
 		
-		resp = mpi.filter_data(endpoint, filters, channel_id, deepcopy(data[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]))
+		data = data[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
+		
+		# User selected a set of channels to segment the data via post-filtering
+		if channel_id:
+			channel_id = loads(channel_id)
+			programs = deepcopy(data['program'])
+			data['program'] = []
+			for program in programs:
+				if program['channelId'] in channel_id:
+					data['program'].append(program)
+		
+		resp = mpi.filter_data(endpoint, filters, data)
 		
 		# User selected to sort the programs in ascending value so simply reverse the list of programs
 		if mode == 'bottom':
@@ -255,10 +260,13 @@ class mpi:
 		# Returns the data as JSON
 		return dumps(resp)
 	
+	# Handles getProgramTagName, getWorkspace, getAbmAccountList, getCustomAttributeName, getOpportunityType
 	def get_filter_names(request):
 		# Loads the appropriate JSON data file
 		path_split = request.path.rpartition('/')
-		data = load(open(os.path.join(json_url, 'mpi.' + path_split[len(path_split) - 1])))
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		data = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
 		
 		# Required query string parameters
 		page = request.args.get('page')
@@ -269,10 +277,13 @@ class mpi:
 		else:
 			return dumps({'success': 'true', 'count': data['count']})
 	
+	# Handles getProgramTagValue, getCustomAttributeValue
 	def get_filter_values(request):
 		# Loads the appropriate JSON data file
 		path_split = request.path.rpartition('/')
-		data = load(open(os.path.join(json_url, 'mpi.' + path_split[len(path_split) - 1])))
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		data = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
 		
 		# Required query string parameters
 		name = request.args.get('name')
@@ -284,12 +295,14 @@ class mpi:
 		else:
 			return dumps({'success': 'true', 'count': data[name]['count']})
 	
-	def quickcharts():
-		return dumps(load(open(os.path.join(json_url, 'mpi.quickcharts.json'))))
+	def quickcharts(request):
+		jsonData = request.args.get('jsonData') or 'default'
+		return dumps(load(open(os.path.join(json_url, 'mpi.' + jsonData + '.quickcharts.json'))))
 	
 	def getUser():
 		return dumps({'munchkin_id':'000-AAA-000','customer_prefix':'mpi4marketolive','user_id':'mpi@marketolive.com'})
 	
+	# Handles 150
 	'''
 	def del_quickchart():
 		return dumps({})

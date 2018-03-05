@@ -16,51 +16,54 @@ def home_page():
 
 # MPI Page
 @app.route('/mpi')
+@app.route('/mpi/<jsonData>')
 @app.route('/marketo-performance')
+@app.route('/marketo-performance/<jsonData>')
 @app.route('/marketing-performance')
-def mpi_page():
+@app.route('/marketing-performance/<jsonData>')
+def mpi_page(jsonData):
 	return render_template('mpi.html')
 
 #MPI JSON Endpoints
-@app.route('/cmo/v1/metadata/getChannel.json')
-@app.route('/cmo/v1/metadata/getProgramRank.json')
-@app.route('/cmo/v1/metadata/getProgram.json')
-@app.route('/cmo/v1/metadata/getChannelTrend.json')
+@app.route('/mpi/metadata/getChannel.json')
+@app.route('/mpi/metadata/getProgramRank.json')
+@app.route('/mpi/metadata/getProgram.json')
+@app.route('/mpi/metadata/getChannelTrend.json')
 def mpi_getChannel():
 	return mpi.get_data(request), None, json_resp_headers
 
-@app.route('/cmo/v1/metadata/getProgramTagName.json')
-@app.route('/cmo/v1/metadata/getWorkspace.json')
-@app.route('/cmo/v1/metadata/getAbmAccountList.json')
-@app.route('/cmo/v1/metadata/getCustomAttributeName.json')
-@app.route('/cmo/v1/metadata/getOpportunityType.json')
+@app.route('/mpi/metadata/getProgramTagName.json')
+@app.route('/mpi/metadata/getWorkspace.json')
+@app.route('/mpi/metadata/getAbmAccountList.json')
+@app.route('/mpi/metadata/getCustomAttributeName.json')
+@app.route('/mpi/metadata/getOpportunityType.json')
 def mpi_get_filter_names():
 	return mpi.get_filter_names(request), None, json_resp_headers
 
-@app.route('/cmo/v1/metadata/getProgramTagValue.json')
-@app.route('/cmo/v1/metadata/getCustomAttributeValue.json')
+@app.route('/mpi/metadata/getProgramTagValue.json')
+@app.route('/mpi/metadata/getCustomAttributeValue.json')
 def mpi_get_filter_values():
 	return mpi.get_filter_values(request), None, json_resp_headers
 
-@app.route('/cmo/v1/metadata/quickcharts.json')
+@app.route('/mpi/metadata/quickcharts.json')
 def mpi_quickcharts():
-	return mpi.quickcharts(), None, json_resp_headers
+	return mpi.quickcharts(request), None, json_resp_headers
 
-@app.route('/cmo/v1/metadata/getUser.json')
+@app.route('/mpi/metadata/getUser.json')
 def mpi_getUser():
 	return mpi.getUser(), None, json_resp_headers
 
-@app.route('/cmo/v1/metadata/export.json')
+@app.route('/mpi/metadata/export.json')
 def mpi_export_ppt():
 	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.pptx')
 
-@app.route('/cmo/v1/export/getExcelData.json')
+@app.route('/mpi/export/getExcelData.json')
 def mpi_export_xls():
 	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.xlsx')
 
 # Endpoint which deletes a Quick Chart
 '''
-@app.route('/cmo/v1/metadata/150.json', methods=['DELETE'])
+@app.route('/mpi/metadata/150.json', methods=['DELETE'])
 def mpi_del_quickchart():
 	return mpi.del_quickchart(), None, json_resp_headers
 '''
