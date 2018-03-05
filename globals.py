@@ -173,7 +173,7 @@ class mpi:
 	}
 	
 	# User selected a set of filters to segment the data via post-filtering
-	def filter_data(endpoint, filters, data):
+	def filter_data(endpoint, filters, channel_id, data):
 		# Counts the number of filters selected plus 1 to set a divisor used to determine if a channel id is an even multiple
 		# Ensures that subset of programs returned are part of the subset of channels returned and are decreasing in size as the number of filters increases
 		num_of_filters = sum(filter is not None for filter in filters)
@@ -190,8 +190,12 @@ class mpi:
 			elif endpoint == 'getProgramRank.json':
 				data['program'] = []
 				for program in items['program']:
-					if int(program['channelId']) % mod == 0:
-						data['program'].append(program)
+					if channel_id:
+						if int(program['id']) % mod == 0:
+							data['program'].append(program)
+					else:
+						if int(program['channelId']) % mod == 0:
+							data['program'].append(program)
 			
 			elif endpoint == 'getChannelTrend.json':
 				data['metric']['channel'] = []
@@ -251,7 +255,7 @@ class mpi:
 				if program['channelId'] in channel_id:
 					data['program'].append(program)
 		
-		resp = mpi.filter_data(endpoint, filters, data)
+		resp = mpi.filter_data(endpoint, filters, channel_id, data)
 		
 		# User selected to sort the programs in ascending value so simply reverse the list of programs
 		if mode == 'bottom':
