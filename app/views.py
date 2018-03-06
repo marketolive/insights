@@ -2,7 +2,7 @@ from app import app
 from flask import request, render_template, redirect
 from re import search
 from globals import *
-import os, requests
+import requests
 
 # Global Vars
 json_resp_headers = {
