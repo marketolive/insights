@@ -86,19 +86,22 @@ def robots():
 # Sets Cache-Control header based upon the Content-Type header
 @app.after_request
 def add_header(response):
-	if search('^application/json;?', response.headers['Content-Type']):
+	if search('^text/html;?', response.headers['Content-Type']):
 		response.cache_control.public = True
-		response.cache_control.max_age = 86400
+		response.cache_control.max_age = 300
+	elif search('^application/json;?', response.headers['Content-Type']):
+		response.cache_control.public = True
+		response.cache_control.max_age = 31536000
 	elif search('/?javascript;?', response.headers['Content-Type']):
 		response.cache_control.public = True
-		response.cache_control.max_age = 86400
-	elif search('^text/(html|css);?', response.headers['Content-Type']):
+		response.cache_control.max_age = 31536000
+	elif search('^text/css;?', response.headers['Content-Type']):
 		response.cache_control.public = True
-		response.cache_control.max_age = 86400
+		response.cache_control.max_age = 31536000
 	elif search('^image/', response.headers['Content-Type']):
 		response.cache_control.public = True
-		response.cache_control.max_age = 86400
+		response.cache_control.max_age = 31536000
 	else:
 		response.cache_control.public = True
-		response.cache_control.max_age = 86400
+		response.cache_control.max_age = 31536000
 	return response
