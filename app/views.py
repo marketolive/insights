@@ -14,7 +14,7 @@ json_resp_headers = {
 def home_page():
 	return redirect('/mpi')
 
-# MPI Default Page
+# MPI Home Page
 @app.route('/mpi')
 @app.route('/marketo-performance')
 @app.route('/marketing-performance')
@@ -28,7 +28,7 @@ def mpi_default_page():
 def mpi_custom_page(jsonData):
 	return render_template('mpi.html')
 
-#MPI JSON Endpoints
+# MPI JSON Endpoints
 @app.route('/mpi/metadata/getChannel.json')
 @app.route('/mpi/metadata/getProgramRank.json')
 @app.route('/mpi/metadata/getProgram.json')
@@ -72,11 +72,23 @@ def mpi_del_quickchart():
 	return mpi.del_quickchart(), None, json_resp_headers
 '''
 
-# Email Insights Page
+# Email Insights Home Page
 @app.route('/email')
 @app.route('/email-insights')
 def ei_page():
 	return render_template('ei.html')
+
+# Email Insights JSON Endpoints
+@app.route('/ei/metadata/dimensions.json')
+@app.route('/ei/metadata/metrics.json')
+@app.route('/ei/settings/user.json')
+@app.route('/ei/analytics/kpis.json')
+def ei_dimensions():
+	return ei.get_data_info(request), None, json_resp_headers
+
+@app.route('/ei/analytics/timeseries.json')
+def ei_timeseries():
+	return ei.timeseries(request), None, json_resp_headers
 
 # Robots route set to disallow search engine indexing of all pages
 @app.route('/robots.txt')

@@ -6,8 +6,6 @@ base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'app/static/json')
 
 class mpi:
-	getChannel = getProgramRank = getChannelTrend = None
-	
 	time_period_list = [
 		'currentMonth',
 		'currentQuarter',
@@ -311,3 +309,39 @@ class mpi:
 	def del_quickchart():
 		return dumps({})
 	'''
+
+class ei:
+	# Handles dimensions, metrics, user, kpis
+	def get_data_info(request):
+		# Loads the appropriate JSON data file
+		path_split = request.path.rpartition('/')
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		# Returns the data as JSON
+		return dumps(load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + path_split[len(path_split) - 1]))))
+	
+	def timeseries(request):
+		# Loads the appropriate JSON data file
+		path_split = request.path.rpartition('/')
+		endpoint = path_split[len(path_split) - 1]
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		#data = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
+		
+		# Multi-value query string parameters
+		kpiTypes_list = None
+		for arg in request.args:
+			if arg[0] == 'kpiTypes':
+				kpiTypes_list.append(arg[1])
+		# Required query string parameters
+		groupByDimension = request.args.get('groupByDimension')
+		granularity = request.args.get('granularity')
+		dateRange = request.args.get('dateRange')
+		customFromDate = request.args.get('customFromDate')
+		customToDate = request.args.get('customToDate')
+		isCompare = request.args.get('isCompare')
+		comparisonBenchmark = request.args.get('comparisonBenchmark')
+		benchFromDate = request.args.get('benchFromDate')
+		benchToDate = request.args.get('benchToDate')
+		
+		return dumps(data)
