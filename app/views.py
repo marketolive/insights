@@ -59,11 +59,11 @@ def mpi_getUser():
 
 @app.route('/mpi/metadata/export.json')
 def mpi_export_ppt():
-	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.pptx')
+	return app.send_static_file('export/mpi.default.pptx')
 
 @app.route('/mpi/export/getExcelData.json')
 def mpi_export_xls():
-	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.xlsx')
+	return app.send_static_file('export/mpi.default.xlsx')
 
 # Endpoint which deletes a Quick Chart
 '''
