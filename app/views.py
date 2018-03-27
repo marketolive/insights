@@ -87,8 +87,9 @@ def ei_dimensions():
 	return ei.get_data_info(request), None, json_resp_headers
 
 @app.route('/ei/analytics/timeseries.json')
-def ei_timeseries():
-	return ei.timeseries(request), None, json_resp_headers
+@app.route('/ei/analytics/breakdown.json')
+def ei_analytics():
+	return ei.analytics(request), None, json_resp_headers
 
 # Robots route set to disallow search engine indexing of all pages
 @app.route('/robots.txt')
