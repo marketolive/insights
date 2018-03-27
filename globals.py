@@ -6,8 +6,6 @@ base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'app/static/json')
 
 class mpi:
-	getChannel = getProgramRank = getChannelTrend = None
-	
 	time_period_list = [
 		'currentMonth',
 		'currentQuarter',
@@ -311,3 +309,74 @@ class mpi:
 	def del_quickchart():
 		return dumps({})
 	'''
+
+class ei:
+	# Default parameter values
+	dateRange_default = 'last30days'
+	isCompare_default = 'false'
+	comparisonBenchmark_default = 'n/a'
+	
+	sortingTypes_dict = {
+		'timeseries': ['n/a'],
+		'breakdown': ['BY_NAME', 'BY_METRIC'],
+		'sends': ['BY_SEND_TIME', 'BY_METRIC']
+	}
+	sortByMetrics_dict = {
+		'timeseries': {
+			'n/a': ['n/a']
+		},
+		'breakdown': {
+			'BY_NAME': ['n/a'],
+			'BY_METRIC': ['OPENS', 'CLICKED_EMAILS', 'TOTAL_UNSUBSCRIBES', 'TOTAL_SENT', 'TOTAL_DELIVERED', 'TOTAL_BOUNCES', 'TOTAL_HARD_BOUNCES', 'TOTAL_SOFT_BOUNCES']
+		},
+		'sends': {
+			'BY_SEND_TIME': ['n/a'],
+			'BY_METRIC': ['TOTAL_SENT', 'TOTAL_DELIVERED', 'DELIVERY_RATE', 'TOTAL_BOUNCES', 'TOTAL_SOFT_BOUNCES', 'TOTAL_HARD_BOUNCES', 'BOUNCE_RATE', 'OPENS', 'OPEN_RATE', 'CLICKED_EMAILS', 'CLICK_THRU_RATE', 'CLICK_TO_OPEN_RATE', 'TOTAL_UNSUBSCRIBES', 'UNSUBSCRIBE_RATE']
+		}
+	}
+
+	# Handles dimensions, metrics, user, kpis
+	def get_data_info(request):
+		# Loads the appropriate JSON data file
+		path_split = request.path.rpartition('/')
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		# Returns the data as JSON
+		return dumps(load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + path_split[len(path_split) - 1]))))
+	
+	def analytics(request):
+		# Loads the appropriate JSON data file
+		path_split = request.path.rpartition('/')
+		endpoint = path_split[len(path_split) - 1]
+		jsonData = request.args.get('jsonData') or 'default'
+		
+		data = load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+		
+		# Required query string parameters
+		dateRange = request.args.get('dateRange')
+		isCompare = request.args.get('isCompare')
+		comparisonBenchmark = request.args.get('comparisonBenchmark')
+		
+		# Multi-value query string parameter
+		kpiTypes_list = None
+		for arg in request.args:
+			if arg[0] == 'kpiTypes':
+				kpiTypes_list.append(arg[1])
+		
+		# Required query string parameters
+		groupByDimension = request.args.get('groupByDimension')
+		granularity = request.args.get('granularity')
+		sortingType = request.args.get('sortingType')
+		sortByMetric = request.args.get('sortByMetric')
+		sortingDirection = request.args.get('sortingDirection')
+		
+		if not dateRange:
+			dateRange = dateRange_default
+		
+		if not isCompare:
+			isCompare = isCompare_default
+		
+		if not comparisonBenchmark:
+			comparisonBenchmark = comparisonBenchmark_default
+		
+		return dumps(data)
