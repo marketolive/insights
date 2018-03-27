@@ -14,7 +14,7 @@ json_resp_headers = {
 def home_page():
 	return redirect('/mpi')
 
-# MPI Default Page
+# MPI Home Page
 @app.route('/mpi')
 @app.route('/marketo-performance')
 @app.route('/marketing-performance')
@@ -28,7 +28,7 @@ def mpi_default_page():
 def mpi_custom_page(jsonData):
 	return render_template('mpi.html')
 
-#MPI JSON Endpoints
+# MPI JSON Endpoints
 @app.route('/mpi/metadata/getChannel.json')
 @app.route('/mpi/metadata/getProgramRank.json')
 @app.route('/mpi/metadata/getProgram.json')
@@ -59,11 +59,11 @@ def mpi_getUser():
 
 @app.route('/mpi/metadata/export.json')
 def mpi_export_ppt():
-	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.pptx')
+	return app.send_static_file('export/mpi.default.pptx')
 
 @app.route('/mpi/export/getExcelData.json')
 def mpi_export_xls():
-	return app.send_static_file('export/mpi-revenue_won_to_cost_ratio_mt-previous_year.xlsx')
+	return app.send_static_file('export/mpi.default.xlsx')
 
 # Endpoint which deletes a Quick Chart
 '''
@@ -72,11 +72,24 @@ def mpi_del_quickchart():
 	return mpi.del_quickchart(), None, json_resp_headers
 '''
 
-# Email Insights Page
+# Email Insights Home Page
 @app.route('/email')
 @app.route('/email-insights')
 def ei_page():
-	return render_template('ei.html')
+	return render_template('ei.old.html')
+
+# Email Insights JSON Endpoints
+@app.route('/ei/metadata/dimensions.json')
+@app.route('/ei/metadata/metrics.json')
+@app.route('/ei/settings/user.json')
+@app.route('/ei/analytics/kpis.json')
+def ei_dimensions():
+	return ei.get_data_info(request), None, json_resp_headers
+
+@app.route('/ei/analytics/timeseries.json')
+@app.route('/ei/analytics/breakdown.json')
+def ei_analytics():
+	return ei.analytics(request), None, json_resp_headers
 
 # Robots route set to disallow search engine indexing of all pages
 @app.route('/robots.txt')
