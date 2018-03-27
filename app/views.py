@@ -76,7 +76,7 @@ def mpi_del_quickchart():
 @app.route('/email')
 @app.route('/email-insights')
 def ei_page():
-	return render_template('ei.html')
+	return render_template('ei.old.html')
 
 # Email Insights JSON Endpoints
 @app.route('/ei/metadata/dimensions.json')
