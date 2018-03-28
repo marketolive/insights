@@ -31,10 +31,17 @@ def mpi_custom_page(jsonData):
 # MPI JSON Endpoints
 @app.route('/mpi/metadata/getChannel.json')
 @app.route('/mpi/metadata/getProgramRank.json')
-@app.route('/mpi/metadata/getProgram.json')
 @app.route('/mpi/metadata/getChannelTrend.json')
 def mpi_getChannel():
 	return mpi.get_data(request), None, json_resp_headers
+
+@app.route('/mpi/metadata/getProgram.json')
+def mpi_getProgram():
+	return mpi.getProgram(request), None, json_resp_headers
+
+@app.route('/mpi/metadata/getProgramTrend.json')
+def mpi_getProgramTrend():
+	return mpi.getProgramTrend(request), None, json_resp_headers
 
 @app.route('/mpi/metadata/getProgramTagName.json')
 @app.route('/mpi/metadata/getWorkspace.json')
