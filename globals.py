@@ -402,6 +402,7 @@ class mpi:
 		
 		# Loads either the getChannelTrend session data or JSON data file
 		if session.get('getChannelTrend', None):
+			print('************ Using getChannelTrend session ******************')
 			channelData = deepcopy(session['getChannelTrend'])
 			resp['metric']['metric_name'] = channelData['metric']['metric_name']
 			resp['metric']['metric_format'] = channelData['metric']['metric_format']
