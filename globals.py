@@ -278,7 +278,7 @@ class mpi:
 			session['getChannelTrend'] = resp
 			session.modified = True
 			print('************ Stored getChannelTrend session ************')
-		else:
+		elif tab_name != 'trend':
 			session.pop('getChannelTrend', None)
 			print('************ Removed getChannelTrend session ************')
 		
