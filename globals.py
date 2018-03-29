@@ -1,7 +1,7 @@
 from json import load, loads, dumps
 from copy import deepcopy
 from random import random, uniform
-from flask import session
+from app import session
 #from math import ceil
 #from re import compile, search
 import os
