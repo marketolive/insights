@@ -277,8 +277,10 @@ class mpi:
 		if period_val_modified:
 			session['getChannelTrend'] = resp
 			session.modified = True
+			print('************ Stored getChannelTrend session ************')
 		else:
 			session.pop('getChannelTrend', None)
+			print('************ Removed getChannelTrend session ************')
 		
 		# Returns the data as JSON
 		return dumps(resp)
@@ -402,7 +404,7 @@ class mpi:
 		
 		# Loads either the getChannelTrend session data or JSON data file
 		if session.get('getChannelTrend', None):
-			print('************ Using getChannelTrend session ******************')
+			print('************ Using getChannelTrend session ************')
 			channelData = deepcopy(session['getChannelTrend'])
 			resp['metric']['metric_name'] = channelData['metric']['metric_name']
 			resp['metric']['metric_format'] = channelData['metric']['metric_format']
