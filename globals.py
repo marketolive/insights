@@ -2,11 +2,13 @@ from json import load, loads, dumps
 from copy import deepcopy
 from random import random, uniform
 from flask import session
+from flask_session import Session
 from app import app
 #from math import ceil
 #from re import compile, search
 import os
 
+Session(app)
 base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'app/static/json')
 
