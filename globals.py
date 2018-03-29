@@ -8,6 +8,8 @@ from app import app
 #from re import compile, search
 import os
 
+app.secret_key = '123123'
+app.config['SESSION_TYPE'] = 'filesystem'
 Session(app)
 base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'app/static/json')
