@@ -1,16 +1,10 @@
 from json import load, loads, dumps
 from copy import deepcopy
 from random import random, uniform
-from flask import session
-from flask_session import Session
-from app import app
 #from math import ceil
 #from re import compile, search
 import os
 
-app.secret_key = '123123'
-app.config['SESSION_TYPE'] = 'filesystem'
-Session(app)
 base_url = os.path.abspath(os.path.dirname(__file__))
 json_url = os.path.join(base_url, 'app/static/json')
 
@@ -213,6 +207,26 @@ class mpi:
 			return data
 		return data
 	
+	# If a value < min_bound_pct is found in getChannelTrend, getProgramTrend responses then set the value as (min_pct <= random_pct <= max_pct) of the first value
+	def populate_data(endpoint, data, min_bound_pct, min_pct, max_pct, default_val):
+		if endpoint == 'getChannelTrend.json':
+			dimension_name = 'channel'
+		elif endpoint == 'getProgramTrend.json':
+			dimension_name = 'program'
+		else:
+			return data
+		
+		for dimension_idx, dimension in enumerate(data['metric'][dimension_name]):
+			for period in dimension['period']:
+				period_val = float(period.get('value', '0'))
+				period_first_val = float(data['metric'][dimension_name][dimension_idx]['period'][0].get('value', default_val))
+				if period_first_val == 0:
+					period_first_val = default_val
+				if period_val == 0 or (period_val / period_first_val) < min_bound_pct:
+					period['value'] = str(period_first_val * uniform(min_pct, max_pct))
+		
+		return data
+	
 	# Handles getChannel, getProgramRank, getChannelTrend
 	def get_data(request):
 		# Loads the appropriate JSON data file
@@ -266,26 +280,8 @@ class mpi:
 		if mode == 'bottom':
 			resp['program'].reverse()
 		
-		# If a 0 or small value is found in getChannelTrend response then set the value as a random percentage of the first value
-		period_val_modified = False
 		if endpoint == 'getChannelTrend.json':
-			for channel_idx, channel in enumerate(resp['metric']['channel']):
-				for period in channel['period']:
-					period_val = float(period.get('value', '0'))
-					period_first_val = float(resp['metric']['channel'][channel_idx]['period'][0].get('value', '100'))
-					if period_first_val == 0:
-						period_first_val = 100
-					if period_val == 0 or (period_val / period_first_val) < 0.2:
-						period['value'] = str(period_first_val * uniform(0.2, 1.8))
-						period_val_modified = True
-		
-		if period_val_modified:
-			session['getChannelTrend'] = resp
-			session.modified = True
-			print('************ Stored getChannelTrend session ************')
-		elif tab_name != 'trend':
-			session.pop('getChannelTrend', None)
-			print('************ Removed getChannelTrend session ************')
+			resp = mpi.populate_data('getChannelTrend.json', resp, 0.2, 0.2, 1.8, 100)
 		
 		# Returns the data as JSON
 		return dumps(resp)
@@ -315,22 +311,22 @@ class mpi:
 		# Sets settings based upon the selected metric and setting as some settings have no effect on the data for the metric selected
 		settings = mpi.settings_dict[top_view_metrics][settings]
 		
-		channelData = channelData[sidebar][tab_name]
-		programData = programData[sidebar][tab_name]
-		channel_id = loads(channel_id)
 		resp = {
 			'success': 'true',
 			'last_update_timestamp': '2018-01-16 22:18:00.0',
 			'program': []
 		}
+		channelData = channelData[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
+		programData = programData[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
+		channel_id = loads(channel_id)
 		
-		for channel in deepcopy(channelData[top_view_metrics][isAttribution][time_period][settings]['channel']):
+		for channel in deepcopy(channelData['channel']):
 			if channel['id'] in channel_id:
 				channel['channelId'] = deepcopy(channel['id'])
 				for metric in channel['metrics']:
 					metric['channelTotal'] = deepcopy(metric.get('value', '0'))
 					metric['channelPreviousPeriodTotal'] = deepcopy(metric['previousPeriodValue'])
-				for program in programData[top_view_metrics][isAttribution][time_period][settings]['program']:
+				for program in programData['program']:
 					if program['channelId'] in channel_id:
 						channel['name'] = program['name']
 						channel['id'] = program['id']
@@ -379,6 +375,9 @@ class mpi:
 		# Loads the appropriate JSON data file
 		jsonData = request.args.get('jsonData') or 'default'
 		
+		channelData = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getChannelTrend.json')))
+		programData = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
+		
 		# Required query string parameters
 		sidebar = request.args.get('sidebar')
 		tab_name = request.args.get('tab_name')
@@ -406,22 +405,10 @@ class mpi:
 				'program': []
 			}
 		}
-		
-		# Loads either the getChannelTrend session data or JSON data file
-		if session.get('getChannelTrend', None):
-			print('************ Using getChannelTrend session ************')
-			channelData = deepcopy(session['getChannelTrend'])
-			resp['metric']['metric_name'] = channelData['metric']['metric_name']
-			resp['metric']['metric_format'] = channelData['metric']['metric_format']
-		else:
-			channelData = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getChannelTrend.json')))
-			channelData = channelData[sidebar][tab_name]
-			resp['metric']['metric_name'] = channelData[top_view_metrics][isAttribution][time_period][settings]['metric']['metric_name']
-			resp['metric']['metric_format'] = channelData[top_view_metrics][isAttribution][time_period][settings]['metric']['metric_format']
-			channelData = channelData[top_view_metrics][isAttribution][time_period][settings]
-		
-		programData = load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
-		programData = programData[sidebar]['contribution']
+		channelData = channelData[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
+		programData = programData[sidebar]['contribution'][top_view_metrics][isAttribution]['previousYear'][settings]
+		resp['metric']['metric_name'] = channelData['metric']['metric_name']
+		resp['metric']['metric_format'] = channelData['metric']['metric_format']
 		channel_id = loads(channel_id)
 		
 		for channel in deepcopy(channelData['metric']['channel']):
@@ -429,7 +416,7 @@ class mpi:
 				channel['channelId'] = deepcopy(channel['id'])
 				for period in channel['period']:
 					period['channelTotal'] = deepcopy(period.get('value', '0'))
-				for program in programData[top_view_metrics][isAttribution]['previousYear'][settings]['program']:
+				for program in programData['program']:
 					if program['channelId'] in channel_id:
 						channel['name'] = program['name']
 						channel['id'] = program['id']
@@ -448,6 +435,8 @@ class mpi:
 						program['period'][idx_period] = deepcopy(period)
 				
 				break
+		
+		resp = mpi.populate_data('getProgramTrend.json', resp, 0.2, 0.2, 1.8, 100)
 		
 		# Returns the data as JSON
 		return dumps(resp)

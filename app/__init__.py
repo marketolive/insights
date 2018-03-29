@@ -1,4 +1,4 @@
-from flask import Flask, session
+from flask import Flask#, session
 #from flask_session import Session
 
 # Initializes the flask app
