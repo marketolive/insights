@@ -280,8 +280,8 @@ class mpi:
 		if mode == 'bottom':
 			resp['program'].reverse()
 		
-		#if endpoint == 'getChannelTrend.json':
-			#resp = mpi.populate_data('getChannelTrend.json', resp, 0.2, 0.2, 1.8, 100)
+		if endpoint == 'getChannelTrend.json':
+			resp = mpi.populate_data('getChannelTrend.json', resp, 0.2, 0.2, 0.8, 100)
 		
 		# Returns the data as JSON
 		return dumps(resp)
@@ -436,7 +436,7 @@ class mpi:
 				
 				break
 		
-		#resp = mpi.populate_data('getProgramTrend.json', resp, 0.2, 0.2, 1.8, 100)
+		resp = mpi.populate_data('getProgramTrend.json', resp, 0.2, 0.2, 0.8, 100)
 		
 		# Returns the data as JSON
 		return dumps(resp)
