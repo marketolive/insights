@@ -18417,9 +18417,9 @@ https://github.com/nodeca/pako/blob/master/LICENSE
         let path_split = window.location.pathname.split('/'),
         jsonData;
         if ((path_split.length - 1) <= 1) {
-          jsonData = 'jsonData=default&version=04022018v1';
+          jsonData = 'jsonData=default&version=04022018v2';
         } else {
-          jsonData = 'jsonData=' + path_split[2] + '&version=04022018v1';
+          jsonData = 'jsonData=' + path_split[2] + '&version=04022018v2';
         }
         e += jsonData;
         
