@@ -217,13 +217,16 @@ class mpi:
 			return data
 		
 		for dimension_idx, dimension in enumerate(data['metric'][dimension_name]):
-			for period in dimension['period']:
-				period_val = float(period.get('value', '0'))
-				period_first_val = float(data['metric'][dimension_name][dimension_idx]['period'][0].get('value', default_val))
-				if period_first_val == 0:
-					period_first_val = default_val
-				if period_val == 0 or (period_val / period_first_val) < min_bound_pct:
-					period['value'] = str(period_first_val * uniform(min_pct, max_pct))
+			if dimension_idx < 16:
+				for period in dimension['period']:
+					period_val = float(period.get('value', '0'))
+					period_first_val = float(data['metric'][dimension_name][dimension_idx]['period'][0].get('value', default_val))
+					if period_first_val == 0:
+						period_first_val = default_val
+					if period_val == 0 or (period_val / period_first_val) < min_bound_pct:
+						period['value'] = str(period_first_val * uniform(min_pct, max_pct))
+			else:
+				break
 		
 		return data
 	
