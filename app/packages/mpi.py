@@ -1,13 +1,8 @@
-from os import path
-from json import load, loads, dumps
-from copy import deepcopy
-from random import random, uniform
-#from math import ceil
-#from re import compile, search
-#import os
+import os, json, copy, random
+#import math, re
 
-app_path = path.abspath(path.join(__file__, '..', '..'))
-json_url = path.join(app_path, 'static/json')
+app_path = os.path.abspath(os.path.join(__file__, '..', '..'))
+json_url = os.path.join(app_path, 'static/json')
 
 time_period_list = [
 	'currentMonth',
@@ -180,7 +175,7 @@ def filter_data(endpoint, filters, channel_id, data):
 	num_of_filters = sum(filter is not None for filter in filters)
 	if num_of_filters > 0:
 		mod = num_of_filters + 1
-		items = deepcopy(data)
+		items = copy.deepcopy(data)
 		
 		if endpoint == 'getChannel.json':
 			data['channel'] = []
@@ -224,7 +219,7 @@ def populate_data(endpoint, data, min_bound_pct, min_pct, max_pct, default_val):
 				if period_first_val == 0:
 					period_first_val = default_val
 				if period_val == 0 or (period_val / period_first_val) < min_bound_pct:
-					period['value'] = str(period_first_val * uniform(min_pct, max_pct))
+					period['value'] = str(period_first_val * random.uniform(min_pct, max_pct))
 		else:
 			break
 	
@@ -237,7 +232,7 @@ def get_data(request):
 	endpoint = path_split[len(path_split) - 1]
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	data = load(open(path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
+	data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
 	
 	# Required query string parameters
 	sidebar = request.args.get('sidebar')
@@ -270,8 +265,8 @@ def get_data(request):
 	
 	# User selected a set of channels to segment the data via post-filtering
 	if channel_id:
-		channel_id = loads(channel_id)
-		programs = deepcopy(data['program'])
+		channel_id = json.loads(channel_id)
+		programs = copy.deepcopy(data['program'])
 		data['program'] = []
 		for program in programs:
 			if program['channelId'] in channel_id:
@@ -287,14 +282,14 @@ def get_data(request):
 		resp = populate_data('getChannelTrend.json', resp, 0.2, 0.2, 0.8, 100)
 	
 	# Returns the data as JSON
-	return dumps(resp)
+	return json.dumps(resp)
 
 def getProgram(request):
 	# Loads the appropriate JSON data file
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	channelData = load(open(path.join(json_url, 'mpi.' + jsonData + '.getChannel.json')))
-	programData = load(open(path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
+	channelData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getChannel.json')))
+	programData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
 	
 	# Required query string parameters
 	sidebar = request.args.get('sidebar')
@@ -321,14 +316,14 @@ def getProgram(request):
 	}
 	channelData = channelData[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
 	programData = programData[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
-	channel_id = loads(channel_id)
+	channel_id = json.loads(channel_id)
 	
-	for channel in deepcopy(channelData['channel']):
+	for channel in copy.deepcopy(channelData['channel']):
 		if channel['id'] in channel_id:
-			channel['channelId'] = deepcopy(channel['id'])
+			channel['channelId'] = copy.deepcopy(channel['id'])
 			for metric in channel['metrics']:
-				metric['channelTotal'] = deepcopy(metric.get('value', '0'))
-				metric['channelPreviousPeriodTotal'] = deepcopy(metric['previousPeriodValue'])
+				metric['channelTotal'] = copy.deepcopy(metric.get('value', '0'))
+				metric['channelPreviousPeriodTotal'] = copy.deepcopy(metric['previousPeriodValue'])
 			for program in programData['program']:
 				if program['channelId'] in channel_id:
 					channel['name'] = program['name']
@@ -339,16 +334,16 @@ def getProgram(request):
 						'value': program['metrics'][0]['value']
 					}
 					'''
-					resp['program'].append(deepcopy(channel))
+					resp['program'].append(copy.deepcopy(channel))
 			
 			r_curr_list = []
 			r_prev_list = []
 			for idx in range(len(channel['metrics'])):
-				r = [random() for i in range(len(resp['program']))]
+				r = [random.random() for i in range(len(resp['program']))]
 				s = sum(r)
 				r_curr_list.append([ i/s for i in r ])
 			for idx in range(len(channel['metrics'])):
-				r = [random() for i in range(len(resp['program']))]
+				r = [random.random() for i in range(len(resp['program']))]
 				s = sum(r)
 				r_prev_list.append([ i/s for i in r ])
 			
@@ -367,19 +362,19 @@ def getProgram(request):
 						metric['value'] = str(round(metric_val, 7))
 					
 					metric['previousPeriodValue'] = str(round(r_prev_list[idx_metric][idx_program] * float(metric['channelPreviousPeriodTotal']), 7))
-					program['metrics'][idx_metric] = deepcopy(metric)
+					program['metrics'][idx_metric] = copy.deepcopy(metric)
 			
 			break
 	
 	# Returns the data as JSON
-	return dumps(resp)
+	return json.dumps(resp)
 
 def getProgramTrend(request):
 	# Loads the appropriate JSON data file
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	channelData = load(open(path.join(json_url, 'mpi.' + jsonData + '.getChannelTrend.json')))
-	programData = load(open(path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
+	channelData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getChannelTrend.json')))
+	programData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
 	
 	# Required query string parameters
 	sidebar = request.args.get('sidebar')
@@ -412,22 +407,22 @@ def getProgramTrend(request):
 	programData = programData[sidebar]['contribution'][top_view_metrics][isAttribution]['previousYear'][settings]
 	resp['metric']['metric_name'] = channelData['metric']['metric_name']
 	resp['metric']['metric_format'] = channelData['metric']['metric_format']
-	channel_id = loads(channel_id)
+	channel_id = json.loads(channel_id)
 	
-	for channel in deepcopy(channelData['metric']['channel']):
+	for channel in copy.deepcopy(channelData['metric']['channel']):
 		if channel['id'] in channel_id:
-			channel['channelId'] = deepcopy(channel['id'])
+			channel['channelId'] = copy.deepcopy(channel['id'])
 			for period in channel['period']:
-				period['channelTotal'] = deepcopy(period.get('value', '0'))
+				period['channelTotal'] = copy.deepcopy(period.get('value', '0'))
 			for program in programData['program']:
 				if program['channelId'] in channel_id:
 					channel['name'] = program['name']
 					channel['id'] = program['id']
-					resp['metric']['program'].append(deepcopy(channel))
+					resp['metric']['program'].append(copy.deepcopy(channel))
 			
 			r_curr_list = []
 			for idx in range(len(channel['period'])):
-				r = [random() for i in range(len(resp['metric']['program']))]
+				r = [random.random() for i in range(len(resp['metric']['program']))]
 				s = sum(r)
 				r_curr_list.append([ i/s for i in r ])
 			
@@ -435,14 +430,14 @@ def getProgramTrend(request):
 				for idx_period, period in enumerate(channel['period']):
 					period_val = r_curr_list[idx_period][idx_program] * float(period['channelTotal'])
 					period['value'] = str(round(period_val, 7))
-					program['period'][idx_period] = deepcopy(period)
+					program['period'][idx_period] = copy.deepcopy(period)
 			
 			break
 	
 	resp = populate_data('getProgramTrend.json', resp, 0.2, 0.2, 0.8, 100)
 	
 	# Returns the data as JSON
-	return dumps(resp)
+	return json.dumps(resp)
 
 # Handles getProgramTagName, getWorkspace, getAbmAccountList, getCustomAttributeName, getOpportunityType
 def get_filter_names(request):
@@ -450,16 +445,16 @@ def get_filter_names(request):
 	path_split = request.path.rpartition('/')
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	data = load(open(path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
+	data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
 	
 	# Required query string parameters
 	page = request.args.get('page')
 	
 	# If page is 0 then returns all the data for the selected filter as JSON and otherwise simply returns the count of the filter values
 	if page == '0':
-		return dumps(data)
+		return json.dumps(data)
 	else:
-		return dumps({'success': 'true', 'count': data['count']})
+		return json.dumps({'success': 'true', 'count': data['count']})
 
 # Handles getProgramTagValue, getCustomAttributeValue
 def get_filter_values(request):
@@ -467,7 +462,7 @@ def get_filter_values(request):
 	path_split = request.path.rpartition('/')
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	data = load(open(path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
+	data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + path_split[len(path_split) - 1])))
 	
 	# Required query string parameters
 	name = request.args.get('name')
@@ -475,19 +470,19 @@ def get_filter_values(request):
 	
 	# If page is 0 then returns all the data for the selected filter as JSON and otherwise simply returns the count of the filter values
 	if page == '0':
-		return dumps(data[name])
+		return json.dumps(data[name])
 	else:
-		return dumps({'success': 'true', 'count': data[name]['count']})
+		return json.dumps({'success': 'true', 'count': data[name]['count']})
 
 def quickcharts(request):
 	jsonData = request.args.get('jsonData') or 'default'
-	return dumps(load(open(path.join(json_url, 'mpi.' + jsonData + '.quickcharts.json'))))
+	return json.dumps(json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.quickcharts.json'))))
 
 def getUser():
-	return dumps({'munchkin_id':'000-AAA-000','customer_prefix':'mpi4marketolive','user_id':'mpi@marketolive.com'})
+	return json.dumps({'munchkin_id':'000-AAA-000','customer_prefix':'mpi4marketolive','user_id':'mpi@marketolive.com'})
 
 # Handles 150
 '''
 def del_quickchart():
-	return dumps({})
+	return json.dumps({})
 '''

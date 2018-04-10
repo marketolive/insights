@@ -1,13 +1,8 @@
-from os import path
-from json import load, dumps
-#from copy import deepcopy
-#from random import random, uniform
-#from math import ceil
-#from re import compile, search
-#import os
+import os, json, operator
+#import copy, random, math, re
 
-app_path = path.abspath(path.join(__file__, '..', '..'))
-json_url = path.join(app_path, 'static/json')
+app_path = os.path.abspath(os.path.join(__file__, '..', '..'))
+json_url = os.path.join(app_path, 'static/json')
 
 # Default parameter values
 dateRange_default = 'last30days'
@@ -36,6 +31,109 @@ sortByMetrics_dict = {
 	}
 }
 
+# User selected a set of filters to segment the data via post-filtering
+def filter_data(endpoint, filters, data):
+	if filters and len(filters) > 0:
+		div = mod = len(filters) + 1
+		for filter in filters:
+			div = mod = mod + len(filters[filter])
+		
+		if endpoint == 'kpis.json':
+			for result in data['result']:
+				value = result['mainMetric']['value']
+				benchmark = result['mainMetric']['benchmark']
+				metricType = result['mainMetric']['metricType']
+				quality = result['mainMetric']['quality']
+				if result['mainMetric']['format'] == 'COUNT':
+					result['mainMetric']['value'] = round(int(value) / div)
+					result['mainMetric']['benchmark'] = round(int(benchmark) / div)
+				else:
+					pct = div / 10
+					if int(value) % mod == 0:
+						result['mainMetric']['value'] = value = float(value) + (float(value) * pct)
+					else:
+						result['mainMetric']['value'] = value = float(value) - (float(value) * pct)
+					if metricType in ['UNSUBSCRIBE_RATE', 'HARD_BOUNCE_RATE']:
+						if value <= benchmark:
+							quality = 'GOOD'
+						else:
+							quality = 'BAD'
+					else:
+						if value >= benchmark:
+							quality = 'GOOD'
+						else:
+							quality = 'BAD'
+				for secondaryMetric in result['secondaryMetrics']:
+					sec_value = secondaryMetric['value']
+					sec_benchmark = secondaryMetric['benchmark']
+					sec_metricType = secondaryMetric['metricType']
+					if secondaryMetric['format'] == 'COUNT':
+						secondaryMetric['value'] = round(int(sec_value) / div)
+						secondaryMetric['benchmark'] = round(int(sec_benchmark) / div)
+					else:
+						sec_pct = div / 10
+						if int(sec_value) % mod == 0:
+							secondaryMetric['value'] = float(sec_value) + (float(sec_value) * sec_pct)
+						else:
+							secondaryMetric['value'] = float(sec_value) - (float(sec_value) * sec_pct)
+		
+		elif endpoint == 'timeseries.json':
+			for metric in data['result']:
+				for point in data['result'][metric]:
+					if point['currentValue']:
+						currentValue = int(point['currentValue']['value'])
+						newValue = currentValue / div
+						if currentValue % 10 != 0:
+							lastDigit = currentValue % 10
+						else:
+							lastDigit = 10
+						pct = lastDigit / 40
+						if currentValue % mod == 0:
+							point['currentValue']['value'] = round(newValue + (newValue * pct))
+						else:
+							point['currentValue']['value'] = round(newValue - (newValue * pct))
+					if point['comparisonValue']:
+						comparisonValue = int(point['comparisonValue']['value'])
+						newValue = comparisonValue / div
+						if comparisonValue % 10 != 0:
+							lastDigit = comparisonValue % 10
+						else:
+							lastDigit = 10
+						pct = lastDigit / 40
+						if comparisonValue % mod == 0:
+							point['comparisonValue']['value'] = round(newValue + (newValue * pct))
+						else:
+							point['comparisonValue']['value'] = round(newValue - (newValue * pct))
+		
+		elif endpoint == 'breakdown.json':
+			for breakdown in data['result']:
+				for metricName in breakdown['metricValues']:
+					currentValue = int(breakdown['metricValues'][metricName]['currentValue'])
+					breakdown['metricValues'][metricName]['currentValue'] = round(currentValue / div)
+					if breakdown['metricValues'][metricName]['comparisonValue']:
+						comparisonValue = int(breakdown['metricValues'][metricName]['comparisonValue'])
+						breakdown['metricValues'][metricName]['comparisonValue'] = int(comparisonValue / div)
+		
+		elif endpoint == 'drivers.json':
+			for driver in data['result']:
+				value = int(driver['value'])
+				score = float(driver['score'])
+				newValue = value / div
+				newScore = score / div
+				if value % 10 != 0:
+					lastDigit = value % 10
+				else:
+					lastDigit = 10
+				pct = lastDigit / 40
+				if value % mod == 0:
+					driver['value'] = round(newValue + (newValue * pct))
+					driver['score'] = newScore + (newScore * pct)
+				else:
+					driver['value'] = round(newValue - (newValue * pct))
+					driver['score'] = newScore - (newScore * pct)
+	
+	return data
+
 # Handles dimensions, metrics, user, kpis, allfilters, workspaces
 def get_data_info(request):
 	# Loads the appropriate JSON data file
@@ -43,8 +141,17 @@ def get_data_info(request):
 	endpoint = path_split[len(path_split) - 1]
 	jsonData = request.args.get('jsonData') or 'default'
 	
+	# Optional query string parameters
+	dimension = request.args.get('dimension')
+	
+	if dimension:
+		dimension	= json.loads(dimension)
+	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	data = filter_data(endpoint, dimension, data)
+	
 	# Returns the data as JSON
-	return dumps(load(open(path.join(json_url, 'ei.' + jsonData + '.' + endpoint))))
+	return json.dumps(data)
 
 # Handles timeseries, breakdown
 def analytics(request):
@@ -62,6 +169,9 @@ def analytics(request):
 	sortingType = request.args.get('sortingType')
 	sortByMetric = request.args.get('sortByMetric')
 	sortingDirection = request.args.get('sortingDirection')
+	
+	# Optional query string parameters
+	dimension = request.args.get('dimension')
 	
 	# Multi-value query string parameter
 	'''
@@ -86,14 +196,18 @@ def analytics(request):
 	if sortByMetric not in sortByMetrics_dict[endpoint][sortingType]:
 		sortByMetric = sortByMetric_default
 	
-	data = load(open(path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	if dimension:
+		dimension	= json.loads(dimension)
+	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
 	data = data[dateRange][isCompare][comparisonBenchmark][groupByDimension][sortingType][sortByMetric]
+	data = filter_data(endpoint, dimension, data)
 	
 	# User selected to sort the results ascending value so simply reverse the list of results
 	if sortingDirection == 'ASCENDING' and endpoint != 'timeseries.json':
 		data['result'].reverse()
 	
-	return dumps(data)
+	return json.dumps(data)
 
 def drivers(request):
 	# Loads the appropriate JSON data file
@@ -106,15 +220,23 @@ def drivers(request):
 	kpiType = request.args.get('kpiType')
 	dimensionGroup = request.args.get('dimensionGroup')
 	
+	# Optional query string parameters
+	dimension = request.args.get('dimension')
+	
 	if not dateRange:
 		dateRange = dateRange_default
 	
 	if not dimensionGroup:
 		dimensionGroup = dimensionGroup_default
 	
-	data = load(open(path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	if dimension:
+		dimension	= json.loads(dimension)
 	
-	return dumps(data[dateRange][kpiType][dimensionGroup])
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	data = data[dateRange][kpiType][dimensionGroup]
+	data = filter_data(endpoint, dimension, data)
+	
+	return json.dumps(data)
 
 def sends(request):
 	# Loads the appropriate JSON data file
@@ -127,6 +249,9 @@ def sends(request):
 	sortingType = request.args.get('sortingType')
 	sortByMetric = request.args.get('sortByMetric')
 	sortingDirection = request.args.get('sortingDirection')
+	
+	# Optional query string parameters
+	dimension = request.args.get('dimension')
 	
 	# Multi-value query string parameter
 	'''
@@ -145,14 +270,18 @@ def sends(request):
 	if sortByMetric not in sortByMetrics_dict[endpoint][sortingType]:
 		sortByMetric = sortByMetric_default
 	
-	data = load(open(path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	if dimension:
+		dimension	= json.loads(dimension)
+	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
 	data = data[dateRange][sortingType][sortByMetric]
+	data = filter_data(endpoint, dimension, data)
 	
 	# User selected to sort the results ascending value so simply reverse the list of results
 	if sortingDirection == 'ASCENDING':
 		data['result'].reverse()
 	
-	return dumps(data)
+	return json.dumps(data)
 
 def filter_values(request, filter):
 	# Loads the appropriate JSON data file
@@ -160,11 +289,11 @@ def filter_values(request, filter):
 	endpoint = path_split[len(path_split) - 1]
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	data = load(open(path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
 	data = data[filter]
 	
 	# Returns the data as JSON
-	return dumps(data)
+	return json.dumps(data)
 
 def quickcharts(request):
-	return dumps({})
+	return json.dumps({'requestId':'null','success':'true','result':[],'errors':'null'})
