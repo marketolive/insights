@@ -2888,6 +2888,25 @@
   S = function(e, t, r) {
     var n = d["default"].API_URL + (0,
     m.replaceVariables)(t, r);
+    
+    let path_split = window.location.pathname.split('/'),
+    version='04092018v1',
+    jsonData;
+    if ((path_split.length - 1) <= 1) {
+      jsonData = 'default';
+    } else {
+      jsonData = path_split[2];
+    }
+    if (typeof(r) === 'object') {
+      r.jsonData = jsonData;
+      r.version = version;
+    } else {
+      r = {
+        'jsonData': jsonData,
+        'version': version
+      };
+    }
+    
     return "GET" == e ? n += "?" + y["default"].stringify(r, {
       arrayFormat: "repeat"
     }) : ("POST" == e || "PUT" == e) && r && r.queryParams && (n += "?" + y["default"].stringify(r.queryParams, {
@@ -3293,10 +3312,21 @@
   Object.defineProperty(t, "__esModule", {
     value: !0
   });
+  
+  let export_api_url = "./ei/metadata/export.json",
+  path_split = window.location.pathname.split('/'),
+  jsonData;
+  if ((path_split.length - 1) <= 1) {
+    jsonData = '?jsonData=default&version=04022018v2';
+  } else {
+    jsonData = '?jsonData=' + path_split[2] + '&version=04092018v1';
+  }
+  export_api_url += jsonData;
+  
   var n = (r(26),
   {
     API_URL: "./ei",
-    EXPORT_API_URL: "./ei/metadata/export.json",
+    EXPORT_API_URL: export_api_url,
     USE_MOCK_API: !1,
     DATA_RETENTION: !0,
     CUSTOM_DIMENSIONS_ALLOWANCE: 10,
@@ -59298,10 +59328,10 @@
   s.createReducer)((o = {},
   a(o, (0,
   l["default"])("SET_USER"), function(e, t) {
-    e.gaSet || (ga("set", "dimension1", t.customerPrefix),
-    ga("set", "dimension2", t.language),
-    ga("set", "dimension3", t.munchkin),
-    ga("send", "pageview"));
+    //e.gaSet || (ga("set", "dimension1", t.customerPrefix),
+    //ga("set", "dimension2", t.language),
+    //ga("set", "dimension3", t.munchkin),
+    //ga("send", "pageview"));
     var r = null;
     return t.lastFilter && (r = i(t.lastFilter)),
     Object.assign({}, e, {
