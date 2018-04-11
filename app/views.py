@@ -1,8 +1,7 @@
 from app import app
 from flask import request, render_template, redirect
+from app.packages import mpi, ei
 import re
-import app.packages.mpi as mpi
-import app.packages.ei as ei
 
 # Global Vars
 json_resp_headers = {
@@ -115,6 +114,10 @@ def ei_sends():
 @app.route('/ei/metadata/dimensions/<filter>/values.json')
 def ei_filter_values(filter):
 	return ei.filter_values(request, filter), None, json_resp_headers
+
+@app.route('/ei/settings/filter.json', methods=['PUT'])
+def ei_filters():
+	return ei.filters(request), None, json_resp_headers
 
 @app.route('/ei/metadata/quickcharts.json')
 def ei_quickcharts():

@@ -32,8 +32,9 @@ sortByMetrics_dict = {
 }
 
 # User selected a set of filters to segment the data via post-filtering
-def filter_data(endpoint, filters, data):
+def filter_data(endpoint, filters, data, sortByMetric=None):
 	if filters and len(filters) > 0:
+		frac = 20
 		div = mod = len(filters) + 1
 		for filter in filters:
 			div = mod = mod + len(filters[filter])
@@ -48,7 +49,7 @@ def filter_data(endpoint, filters, data):
 					result['mainMetric']['value'] = round(int(value) / div)
 					result['mainMetric']['benchmark'] = round(int(benchmark) / div)
 				else:
-					pct = div / 10
+					pct = div / frac
 					if int(value) % mod == 0:
 						result['mainMetric']['value'] = value = float(value) + (float(value) * pct)
 					else:
@@ -71,7 +72,7 @@ def filter_data(endpoint, filters, data):
 						secondaryMetric['value'] = round(int(sec_value) / div)
 						secondaryMetric['benchmark'] = round(int(sec_benchmark) / div)
 					else:
-						sec_pct = div / 10
+						sec_pct = div / frac
 						if int(sec_value) % mod == 0:
 							secondaryMetric['value'] = float(sec_value) + (float(sec_value) * sec_pct)
 						else:
@@ -84,10 +85,9 @@ def filter_data(endpoint, filters, data):
 						currentValue = int(point['currentValue']['value'])
 						newValue = currentValue / div
 						if currentValue % 10 != 0:
-							lastDigit = currentValue % 10
+							pct = (currentValue % 10) / frac
 						else:
-							lastDigit = 10
-						pct = lastDigit / 40
+							pct = 10 / frac
 						if currentValue % mod == 0:
 							point['currentValue']['value'] = round(newValue + (newValue * pct))
 						else:
@@ -96,41 +96,94 @@ def filter_data(endpoint, filters, data):
 						comparisonValue = int(point['comparisonValue']['value'])
 						newValue = comparisonValue / div
 						if comparisonValue % 10 != 0:
-							lastDigit = comparisonValue % 10
+							pct = (comparisonValue % 10) / frac
 						else:
-							lastDigit = 10
-						pct = lastDigit / 40
+							pct = 10 / frac
 						if comparisonValue % mod == 0:
 							point['comparisonValue']['value'] = round(newValue + (newValue * pct))
 						else:
 							point['comparisonValue']['value'] = round(newValue - (newValue * pct))
 		
 		elif endpoint == 'breakdown.json':
-			for breakdown in data['result']:
+			newValues = []
+			results = []
+			for i, breakdown in enumerate(data['result']):
 				for metricName in breakdown['metricValues']:
 					currentValue = int(breakdown['metricValues'][metricName]['currentValue'])
-					breakdown['metricValues'][metricName]['currentValue'] = round(currentValue / div)
+					newValue = currentValue / div
+					if currentValue % 10 != 0:
+						pct = (currentValue % 10) / frac
+					else:
+						pct = 10 / frac
+					if currentValue % mod == 0:
+						breakdown['metricValues'][metricName]['currentValue'] = round(newValue + (newValue * pct))
+					else:
+						breakdown['metricValues'][metricName]['currentValue'] = round(newValue - (newValue * pct))
 					if breakdown['metricValues'][metricName]['comparisonValue']:
 						comparisonValue = int(breakdown['metricValues'][metricName]['comparisonValue'])
-						breakdown['metricValues'][metricName]['comparisonValue'] = int(comparisonValue / div)
+						newComparisonValue = comparisonValue / div
+						if comparisonValue % 10 != 0:
+							pct = (comparisonValue % 10) / frac
+						else:
+							pct = 10 / frac
+						if comparisonValue % mod == 0:
+							breakdown['metricValues'][metricName]['comparisonValue'] = round(newComparisonValue + (newComparisonValue * pct))
+						else:
+							breakdown['metricValues'][metricName]['comparisonValue'] = round(newComparisonValue - (newComparisonValue * pct))
+				if sortByMetric not in [None, 'n/a']:
+					newValues.append([i, breakdown['metricValues'][sortByMetric]['currentValue']])
+			if sortByMetric not in [None, 'n/a']:
+				newValues.sort(key=operator.itemgetter(1), reverse=True)
+				for value in newValues:
+					results.append(data['result'][value[0]])
+				data['result'] = results
 		
 		elif endpoint == 'drivers.json':
-			for driver in data['result']:
+			newScores = []
+			results = []
+			for i, driver in enumerate(data['result']):
 				value = int(driver['value'])
 				score = float(driver['score'])
 				newValue = value / div
 				newScore = score / div
 				if value % 10 != 0:
-					lastDigit = value % 10
+					pct = (value % 10) / frac
 				else:
-					lastDigit = 10
-				pct = lastDigit / 40
+					pct = 10 / frac
 				if value % mod == 0:
 					driver['value'] = round(newValue + (newValue * pct))
 					driver['score'] = newScore + (newScore * pct)
 				else:
 					driver['value'] = round(newValue - (newValue * pct))
 					driver['score'] = newScore - (newScore * pct)
+				newScores.append([i, driver['score']])
+			newScores.sort(key=operator.itemgetter(1), reverse=True)
+			for score in newScores:
+				results.append(data['result'][score[0]])
+			data['result'] = results
+		
+		elif endpoint == 'sends.json':
+			newValues = []
+			results = []
+			for i, send in enumerate(data['result']):
+				for metricName in send['metrics']:
+					value = float(send['metrics'][metricName])
+					newValue = value / div
+					if value % 10 != 0:
+						pct = (value % 10) / frac
+					else:
+						pct = 10 / frac
+					if value % mod == 0:
+						send['metrics'][metricName] = newValue + (newValue * pct)
+					else:
+						send['metrics'][metricName] = newValue - (newValue * pct)
+				if sortByMetric not in [None, 'n/a']:
+					newValues.append([i, send['metrics'][sortByMetric]])
+			if sortByMetric not in [None, 'n/a']:
+				newValues.sort(key=operator.itemgetter(1), reverse=True)
+				for value in newValues:
+					results.append(data['result'][value[0]])
+				data['result'] = results
 	
 	return data
 
@@ -201,7 +254,7 @@ def analytics(request):
 	
 	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
 	data = data[dateRange][isCompare][comparisonBenchmark][groupByDimension][sortingType][sortByMetric]
-	data = filter_data(endpoint, dimension, data)
+	data = filter_data(endpoint, dimension, data, sortByMetric)
 	
 	# User selected to sort the results ascending value so simply reverse the list of results
 	if sortingDirection == 'ASCENDING' and endpoint != 'timeseries.json':
@@ -275,7 +328,7 @@ def sends(request):
 	
 	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
 	data = data[dateRange][sortingType][sortByMetric]
-	data = filter_data(endpoint, dimension, data)
+	data = filter_data(endpoint, dimension, data, sortByMetric)
 	
 	# User selected to sort the results ascending value so simply reverse the list of results
 	if sortingDirection == 'ASCENDING':
@@ -295,5 +348,27 @@ def filter_values(request, filter):
 	# Returns the data as JSON
 	return json.dumps(data)
 
+def filters(request):
+	# Required query string parameters
+	emailType = int(request.args.get('emailType'))
+	isOn = request.args.get('isOn')
+	
+	resp = {'requestId':None,'success':True,'result':None,'errors':None}
+	
+	if emailType == 1:
+		flag = 'BATCH'
+	elif emailType == 2:
+		flag = 'TRIGGER'
+	elif emailType == 3:
+		flag = 'OPERATIONAL'
+	else:
+		flag = 'OPERATIONAL'
+	
+	# Sets the appropriate result
+	resp['result'] = 'Successfully set ' + flag + ' flag to ' + isOn + ' for user id: email@marketolive.com'
+	
+	# Returns the data as JSON
+	return json.dumps(resp)
+
 def quickcharts(request):
-	return json.dumps({'requestId':'null','success':'true','result':[],'errors':'null'})
+	return json.dumps({'requestId':None,'success':True,'result':[],'errors':None})
