@@ -371,4 +371,42 @@ def filters(request):
 	return json.dumps(resp)
 
 def quickcharts(request):
-	return json.dumps({'requestId':None,'success':True,'result':[],'errors':None})
+	# Loads the appropriate JSON data file
+	path_split = request.path.rpartition('/')
+	endpoint = path_split[len(path_split) - 1]
+	jsonData = request.args.get('jsonData') or 'default'
+	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	
+	# Returns the data as JSON
+	return json.dumps(data)
+	#return json.dumps({'requestId':None,'success':True,'result':[],'errors':None})
+
+# Handles getting a Quick Chart
+def get_quickchart(request):
+	# Loads the appropriate JSON data file
+	jsonData = request.args.get('jsonData') or 'default'
+	
+	# Required query string parameters
+	quickchartId = request.args.get('quickchartId')
+	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.quickcharts.get.json')))
+	data = data[quickchartId]
+	
+	# Returns the data as JSON
+	return json.dumps(data)
+
+# Handles reorders and deletes a Quick Chart
+def modify_quickchart():
+	return json.dumps({'requestId':None,'success':True,'result':None,'errors':None})
+
+# Handles quickcharts POST which saves a Quick Chart
+def save_quickcharts(request):
+	# Required query string parameters
+	chartName = request.args.get('chartName')
+	
+	data = json.load(open(os.path.join(json_url, 'ei.default.quickchart.example.json')))
+	data['result'][0]['name'] = chartName
+	
+	# Returns the data as JSON
+	return json.dumps(data)
