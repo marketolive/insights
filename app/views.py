@@ -13,17 +13,16 @@ json_resp_headers = {
 def home_page():
 	return redirect('/mpi')
 
+
 # MPI Home Page
 @app.route('/mpi')
-@app.route('/marketo-performance')
-@app.route('/marketing-performance')
+@app.route('/performance-insights')
 def mpi_default_page():
 	return render_template('mpi.html')
 
 # MPI Custom Page
 @app.route('/mpi/<jsonData>')
-@app.route('/marketo-performance/<jsonData>')
-@app.route('/marketing-performance/<jsonData>')
+@app.route('/performance-insights/<jsonData>')
 def mpi_custom_page(jsonData):
 	return render_template('mpi.html')
 
@@ -73,16 +72,25 @@ def mpi_export_xls():
 	jsonData = request.args.get('jsonData') or 'default'
 	return app.send_static_file('export/mpi.' + jsonData + '.xlsx')
 
-# Endpoint which deletes a Quick Chart
+# Endpoints which reorders and deletes a Quick Chart
+@app.route('/mpi/metadata/quickcharts/<chart>.json', methods=['PUT', 'DELETE'])
+def mpi_modify_quickchart(chart):
+	return mpi.modify_quickchart(), None, json_resp_headers
+
+# Endpoint which saves a Quick Chart
 '''
-@app.route('/mpi/metadata/150.json', methods=['DELETE'])
-def mpi_del_quickchart():
-	return mpi.del_quickchart(), None, json_resp_headers
+@app.route('/mpi/metadata/quickcharts.json', methods=['POST'])
+def mpi_save_quickchart():
+	return mpi.save_quickchart(), None, json_resp_headers
 '''
 
+
+# Email Insights Old Home Page
+@app.route('/email')
+def ei_old_page():
+	return render_template('ei.old.html')
 
 # Email Insights Home Page
-@app.route('/email')
 @app.route('/email-insights')
 def ei_page():
 	return render_template('ei.html')
@@ -127,6 +135,21 @@ def ei_quickcharts():
 def ei_export_ppt():
 	jsonData = request.args.get('jsonData') or 'default'
 	return app.send_static_file('export/ei.' + jsonData + '.pptx')
+
+# Endpoint which gets a saved Quick Chart
+@app.route('/ei/metadata/quickcharts/<chart>.json', methods=['GET'])
+def ei_get_quickchart(chart):
+	return ei.get_quickchart(request), None, json_resp_headers
+
+# Endpoints which reorders and deletes a Quick Chart
+@app.route('/ei/metadata/quickcharts/<chart>.json', methods=['PUT', 'DELETE'])
+def ei_modify_quickchart(chart):
+	return ei.modify_quickchart(), None, json_resp_headers
+
+# Endpoint which saves a Quick Chart
+@app.route('/ei/metadata/quickcharts.json', methods=['POST'])
+def ei_save_quickcharts():
+	return ei.save_quickcharts(request), None, json_resp_headers
 
 
 # Robots route set to disallow search engine indexing of all pages

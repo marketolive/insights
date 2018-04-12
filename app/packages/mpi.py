@@ -479,10 +479,14 @@ def quickcharts(request):
 	return json.dumps(json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.quickcharts.json'))))
 
 def getUser():
-	return json.dumps({'munchkin_id':'000-AAA-000','customer_prefix':'mpi4marketolive','user_id':'mpi@marketolive.com'})
+	return json.dumps({'munchkin_id':'000-AAA-000','customer_prefix':'insights4marketolive','user_id':'mpi@marketolive.com'})
 
-# Handles 150
+# Handles reorders and deletes a Quick Chart
+def modify_quickchart():
+	return json.dumps({'requestId':None,'success':True,'result':None,'errors':None})
+
+# Handles quickcharts POST which saves a Quick Chart
 '''
-def del_quickchart():
-	return json.dumps({})
+def save_quickchart():
+	return json.dumps({'requestId':None,'success':True,'result':[],'errors':None})
 '''
