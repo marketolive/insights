@@ -21904,7 +21904,7 @@
         }, u["default"].createElement("div", {
           className: "row row-content"
         }, u["default"].createElement("a", {
-          href: "/",
+          href: window.location.href,
           className: "marketo-bar-logo"
         }, u["default"].createElement(f["default"], {
           symbol: "marketo-logo"
