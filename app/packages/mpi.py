@@ -486,7 +486,44 @@ def modify_quickchart():
 	return json.dumps({'requestId':None,'success':True,'result':None,'errors':None})
 
 # Handles quickcharts POST which saves a Quick Chart
-'''
-def save_quickchart():
-	return json.dumps({'requestId':None,'success':True,'result':[],'errors':None})
-'''
+def save_quickchart(request):
+	data = json.load(open(os.path.join(json_url, 'mpi.default.quickchart.example.json')))
+	
+	# Required query string parameters
+	sidebar = request.args.get('sidebar')
+	tab_name = request.args.get('tab_name')
+	top_view_metrics = request.args.get('top_view_metrics')
+	isAttribution = request.args.get('isAttribution')
+	time_period = request.args.get('time_period')
+	mode = request.args.get('mode')
+	settings = request.args.get('settings')
+	chartName = request.args.get('chartName')
+	program_tag = request.args.get('program_tag')
+	workspace = request.args.get('workspace')
+	abm_account_list = request.args.get('abm_account_list')
+	custom_attribute = request.args.get('custom_attribute')
+	investment_period = request.args.get('investment_period')
+	opportunity_type = request.args.get('opportunity_type')
+	page = request.args.get('page')
+	page_size = request.args.get('page_size')
+	
+	data['result'][0]['sidebar'] = sidebar
+	data['result'][0]['tabName'] = tab_name
+	data['result'][0]['topViewMetrics'] = top_view_metrics
+	data['result'][0]['timePeriod'] = time_period
+	data['result'][0]['abmAccountList'] = abm_account_list
+	data['result'][0]['investmentPeriod'] = investment_period
+	data['result'][0]['opportunityType'] = opportunity_type
+	data['result'][0]['customAttribute'] = custom_attribute
+	data['result'][0]['programTag'] = program_tag
+	data['result'][0]['workspace'] = workspace
+	data['result'][0]['settings'] = settings
+	data['result'][0]['isAttribution'] = isAttribution
+	data['result'][0]['mode'] = mode
+	data['result'][0]['page'] = page
+	data['result'][0]['page_size'] = page_size
+	data['result'][0]['name'] = chartName
+	data['result'][0]['result'] = request.get_json(force=True)
+	
+	# Returns the data as JSON
+	return json.dumps(data)

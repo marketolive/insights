@@ -78,11 +78,9 @@ def mpi_modify_quickchart(chart):
 	return mpi.modify_quickchart(), None, json_resp_headers
 
 # Endpoint which saves a Quick Chart
-'''
 @app.route('/mpi/metadata/quickcharts.json', methods=['POST'])
 def mpi_save_quickchart():
-	return mpi.save_quickchart(), None, json_resp_headers
-'''
+	return mpi.save_quickchart(request), None, json_resp_headers
 
 
 # Email Insights Old Home Page
@@ -149,14 +147,16 @@ def ei_get_quickchart(chart):
 # Endpoints which reorders and deletes a Quick Chart
 @app.route('/ei/metadata/quickcharts/<chart>.json', methods=['PUT', 'DELETE'])
 def ei_modify_quickchart(chart):
-	request.data = None
-	print('********************')
 	return ei.modify_quickchart(), None, json_resp_headers
 
 # Endpoint which saves a Quick Chart
 @app.route('/ei/metadata/quickcharts.json', methods=['POST'])
-def ei_save_quickcharts():
-	return ei.save_quickcharts(request), None, json_resp_headers
+def ei_save_quickchart():
+	return ei.save_quickchart(request), None, json_resp_headers
+
+@app.route('/ei/settings/dimensions/activate/<dimension>.json', methods=['PUT'])
+def ei_activate_dimension(dimension):
+	return ei.activate_dimension(request, dimension), None, json_resp_headers
 
 
 # Robots route set to disallow search engine indexing of all pages
