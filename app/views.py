@@ -158,6 +158,10 @@ def ei_save_quickchart():
 def ei_activate_dimension(dimension):
 	return ei.activate_dimension(request, dimension), None, json_resp_headers
 
+@app.route('/ei/user/logout')
+def ei_logout():
+	return redirect('https://login.marketo.com/')
+
 
 # Robots route set to disallow search engine indexing of all pages
 @app.route('/robots.txt')
