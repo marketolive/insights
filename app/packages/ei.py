@@ -403,7 +403,7 @@ def modify_quickchart():
 	return json.dumps({'requestId':None,'success':True,'result':None,'errors':None})
 
 # Handles quickcharts POST which saves a Quick Chart
-def save_quickcharts(request):
+def save_quickchart(request):
 	# Required query string parameters
 	chartName = request.args.get('chartName')
 	
@@ -412,3 +412,16 @@ def save_quickcharts(request):
 	
 	# Returns the data as JSON
 	return json.dumps(data)
+
+# Handles activating/deactivating of custom dimensions
+def activate_dimension(request, dimension):
+	# Required query string parameters
+	isActive = request.args.get('isActive')
+	
+	resp = {'requestId':None,'success':True,'result':None,'errors':None}
+	
+	# Sets the appropriate result
+	resp['result'] = 'Successfully set active flag to ' + isActive + ' for dimension id: ' + dimension
+	
+	# Returns the data as JSON
+	return json.dumps(resp)
