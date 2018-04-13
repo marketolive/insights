@@ -95,6 +95,11 @@ def ei_old_page():
 def ei_page():
 	return render_template('ei.html')
 
+# Email Insights Custom Page
+@app.route('/email-insights/<jsonData>')
+def ei_custom_page(jsonData):
+	return render_template('ei.html')
+
 # Email Insights JSON Endpoints
 @app.route('/ei/metadata/dimensions.json')
 @app.route('/ei/metadata/metrics.json')
