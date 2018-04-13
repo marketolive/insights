@@ -3191,7 +3191,7 @@
   }
   ,
   b.deleteQuickchart = function(e) {
-    return M.deleteQuickchart(Object.assign({}, '', {
+    return M.deleteQuickchart(Object.assign({}, e, {
       quickchartId: e.id
     }))
   }

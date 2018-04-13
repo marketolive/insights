@@ -1,5 +1,5 @@
-import os, json, operator
-#import copy, random, math, re
+import os, json, operator, re
+#import copy, random, math
 
 app_path = os.path.abspath(os.path.join(__file__, '..', '..'))
 json_url = os.path.join(app_path, 'static/json')
@@ -177,6 +177,8 @@ def filter_data(endpoint, filters, data, sortByMetric=None):
 						send['metrics'][metricName] = newValue + (newValue * pct)
 					else:
 						send['metrics'][metricName] = newValue - (newValue * pct)
+					if not re.search('_RATE$', metricName):
+						send['metrics'][metricName] = round(send['metrics'][metricName])
 				if sortByMetric not in [None, 'n/a']:
 					newValues.append([i, send['metrics'][sortByMetric]])
 			if sortByMetric not in [None, 'n/a']:

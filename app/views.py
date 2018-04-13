@@ -149,6 +149,8 @@ def ei_get_quickchart(chart):
 # Endpoints which reorders and deletes a Quick Chart
 @app.route('/ei/metadata/quickcharts/<chart>.json', methods=['PUT', 'DELETE'])
 def ei_modify_quickchart(chart):
+	request.data = None
+	console.log('********************')
 	return ei.modify_quickchart(), None, json_resp_headers
 
 # Endpoint which saves a Quick Chart
