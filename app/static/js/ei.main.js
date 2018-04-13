@@ -2890,7 +2890,7 @@
     m.replaceVariables)(t, r);
     
     let path_split = window.location.pathname.split('/'),
-    version='04132018v1',
+    version='04132018v2',
     jsonData;
     if ((path_split.length - 1) <= 1) {
       jsonData = 'default';
@@ -3317,9 +3317,9 @@
   path_split = window.location.pathname.split('/'),
   jsonData;
   if ((path_split.length - 1) <= 1) {
-    jsonData = '?jsonData=default&version=04132018v1';
+    jsonData = '?jsonData=default&version=04132018v2';
   } else {
-    jsonData = '?jsonData=' + path_split[2] + '&version=04132018v1';
+    jsonData = '?jsonData=' + path_split[2] + '&version=04132018v2';
   }
   export_api_url += jsonData;
   
