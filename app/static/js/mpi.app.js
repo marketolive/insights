@@ -18417,9 +18417,9 @@ https://github.com/nodeca/pako/blob/master/LICENSE
         let path_split = window.location.pathname.split('/'),
         jsonData;
         if ((path_split.length - 1) <= 1) {
-          jsonData = 'jsonData=default&version=03272018v1';
+          jsonData = 'jsonData=default&version=04142018v1';
         } else {
-          jsonData = 'jsonData=' + path_split[2] + '&version=03272018v1';
+          jsonData = 'jsonData=' + path_split[2] + '&version=04142018v1';
         }
         e += jsonData;
         
@@ -31295,12 +31295,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   ROCH: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "Marketo | Marketing Performance Insights"
+        Marketo_Analytics: "Marketo | Performance Insights"
       },
       page: {
         header: "Quais são os meus canais e programas de melhor desempenho?",
         analytics: "Análises",
-        marketingPerformance: "Marketing Performance Insights:",
+        marketingPerformance: "Performance Insights:",
         contribution: "Contribuição",
         trend: "Tendência"
       },
@@ -31694,7 +31694,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "Observação",
-        mainMessage: "A configuração de atribuição de análises está atualmente definida como Explícitas. Essa é a configuração de atribuição mais restritiva. Isso afeta o número de oportunidades relatadas no Marketing Performance Insights. Convém alterar a configuração de atribuição para um valor menos restritivo.",
+        mainMessage: "A configuração de atribuição de análises está atualmente definida como Explícitas. Essa é a configuração de atribuição mais restritiva. Isso afeta o número de oportunidades relatadas no Performance Insights. Convém alterar a configuração de atribuição para um valor menos restritivo.",
         linkText: "Saiba mais sobre como alterar configurações de atribuição de análises",
         OK: "OK"
       },
@@ -34069,12 +34069,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   SyEW: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "Marketo | Marketing Performance Insights"
+        Marketo_Analytics: "Marketo | Performance Insights"
       },
       page: {
         header: "Quels sont mes canaux et programmes les plus performants ?",
         analytics: "Analytics",
-        marketingPerformance: "Marketing Performance Insights :",
+        marketingPerformance: "Performance Insights :",
         contribution: "Contribution",
         trend: "Tendance"
       },
@@ -34468,7 +34468,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "Noter",
-        mainMessage: "Le paramètre d’attribution pour les analyses est actuellement défini sur Explicite. Il s’agit du paramètre d’attribution le plus contraignant. Il affecte le nombre d’opportunités signalées dans Marketing Performance Insights. Nous recommandons d’opter pour un paramètre d’attribution moins contraignant.",
+        mainMessage: "Le paramètre d’attribution pour les analyses est actuellement défini sur Explicite. Il s’agit du paramètre d’attribution le plus contraignant. Il affecte le nombre d’opportunités signalées dans Performance Insights. Nous recommandons d’opter pour un paramètre d’attribution moins contraignant.",
         linkText: "En savoir plus sur la modification des paramètres d’attribution pour les analyses",
         OK: "OK"
       },
@@ -35070,12 +35070,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   TWDf: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: ":Marketo | Marketing Performance Insights:"
+        Marketo_Analytics: ":Marketo | Performance Insights:"
       },
       page: {
         header: ":What are my best performing Channels & Programs:?",
         analytics: ":Analytics:",
-        marketingPerformance: ":Marketing Performance Insights::",
+        marketingPerformance: ":Performance Insights::",
         contribution: ":Contribution:",
         trend: ":Trend:"
       },
@@ -35469,7 +35469,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: ":Note:",
-        mainMessage: ":The Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Marketing Performance Insights. Please consider changing the attribution setting to a less restrictive value:.",
+        mainMessage: ":The Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Performance Insights. Please consider changing the attribution setting to a less restrictive value:.",
         linkText: ":Learn more about how to change attribution settings for analytics:",
         OK: ":OK:"
       },
@@ -42856,7 +42856,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   ZzZ3: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "Marketo | Marketing Performance Insights"
+        Marketo_Analytics: "Marketo | Performance Insights"
       },
       page: {
         header: "Welche meiner Kanäle und Programme sind am leistungsstärksten?",
@@ -43255,7 +43255,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "Hinweis",
-        mainMessage: "Die Zuordnungseinstellung für Analyse ist momentan auf Explizit eingestellt. Dies ist die Zuordnungseinstellung mit den meisten Einschränkungen. Dies hat auf die Anzahl der Chancen, über die in Marketing Performance Insights Berichte vorliegen, Einfluss. Bitte erwägen Sie die Änderung der Zuordnungseinstellung in einen Wert mit weniger Einschränkungen.",
+        mainMessage: "Die Zuordnungseinstellung für Analyse ist momentan auf Explizit eingestellt. Dies ist die Zuordnungseinstellung mit den meisten Einschränkungen. Dies hat auf die Anzahl der Chancen, über die in Performance Insights Berichte vorliegen, Einfluss. Bitte erwägen Sie die Änderung der Zuordnungseinstellung in einen Wert mit weniger Einschränkungen.",
         linkText: "Weitere Informationen dazu, wie Zuordnungseinstellungen geändert werden, finden Sie hier.",
         OK: "OK"
       },
@@ -78883,12 +78883,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   n1qM: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "Marketo | Marketing Performance Insights"
+        Marketo_Analytics: "Marketo | Performance Insights"
       },
       page: {
         header: "What are my best performing Channels & Programs?",
         analytics: "Analytics",
-        marketingPerformance: "Marketing Performance Insights:",
+        marketingPerformance: "Performance Insights:",
         contribution: "Contribution",
         trend: "Trend"
       },
@@ -79290,7 +79290,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "Note",
-        mainMessage: "The Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Marketing Performance Insights. Please consider changing the attribution setting to a less restrictive value.",
+        mainMessage: "The Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Performance Insights. Please consider changing the attribution setting to a less restrictive value.",
         linkText: "Learn more about how to change attribution settings for analytics",
         OK: "OK"
       },
@@ -83882,12 +83882,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   uukq: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "Marketo | Marketing Performance Insights"
+        Marketo_Analytics: "Marketo | Performance Insights"
       },
       page: {
         header: "¿Cuáles son mis canales y programas de mayor rendimiento?",
         analytics: "Análisis",
-        marketingPerformance: "Marketing Performance Insights:",
+        marketingPerformance: "Performance Insights:",
         contribution: "Contribución",
         trend: "Tendencia"
       },
@@ -84281,7 +84281,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "Nota",
-        mainMessage: "La configuración de atribución para análisis actualmente está definida como Explícita. Esta es la configuración de atribución más restrictiva. Esto afecta la cantidad de oportunidades informadas en Marketing Performance Insights. Considere la opción de modificar la configuración de atribución a un valor menos restrictivo.",
+        mainMessage: "La configuración de atribución para análisis actualmente está definida como Explícita. Esta es la configuración de atribución más restrictiva. Esto afecta la cantidad de oportunidades informadas en Performance Insights. Considere la opción de modificar la configuración de atribución a un valor menos restrictivo.",
         linkText: "Obtenga más información sobre cómo modificar la configuración de atribución para análisis",
         OK: "Aceptar"
       },
@@ -84784,12 +84784,12 @@ https://github.com/nodeca/pako/blob/master/LICENSE
   vMD4: function(e, t) {
     e.exports = {
       title: {
-        Marketo_Analytics: "àMarketo | Marketing Performance Insights_海"
+        Marketo_Analytics: "àMarketo | Performance Insights_海"
       },
       page: {
         header: "àWhat are my best performing Channels & Programs_海?",
         analytics: "àAnalytics_海",
-        marketingPerformance: "àMarketing Performance Insights_海:",
+        marketingPerformance: "àPerformance Insights_海:",
         contribution: "àContribution_海",
         trend: "àTrend_海"
       },
@@ -85183,7 +85183,7 @@ https://github.com/nodeca/pako/blob/master/LICENSE
       },
       fullPageNoData: {
         header: "àNote_海",
-        mainMessage: "àThe Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Marketing Performance Insights. Please consider changing the attribution setting to a less restrictive value_海.",
+        mainMessage: "àThe Attribution Setting for Analytics is currently set to Explicit. This is the most restrictive attribution setting. This affects the number of opportunities reported in Performance Insights. Please consider changing the attribution setting to a less restrictive value_海.",
         linkText: "àLearn more about how to change attribution settings for analytics_海",
         OK: "àOK_海"
       },
