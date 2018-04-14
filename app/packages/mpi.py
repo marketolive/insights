@@ -496,34 +496,73 @@ def save_quickchart(request):
 	isAttribution = request.args.get('isAttribution')
 	time_period = request.args.get('time_period')
 	mode = request.args.get('mode')
-	settings = request.args.get('settings')
+	page = request.args.get('page')
+	page_size = request.args.get('page_size')
 	chartName = request.args.get('chartName')
+	
+	# Optional query string parameters
 	program_tag = request.args.get('program_tag')
 	workspace = request.args.get('workspace')
 	abm_account_list = request.args.get('abm_account_list')
 	custom_attribute = request.args.get('custom_attribute')
 	investment_period = request.args.get('investment_period')
 	opportunity_type = request.args.get('opportunity_type')
-	page = request.args.get('page')
-	page_size = request.args.get('page_size')
+	settings = request.args.get('settings')
 	
-	data['result'][0]['sidebar'] = sidebar
-	data['result'][0]['tabName'] = tab_name
-	data['result'][0]['topViewMetrics'] = top_view_metrics
-	data['result'][0]['timePeriod'] = time_period
-	data['result'][0]['abmAccountList'] = abm_account_list
-	data['result'][0]['investmentPeriod'] = investment_period
-	data['result'][0]['opportunityType'] = opportunity_type
-	data['result'][0]['customAttribute'] = custom_attribute
-	data['result'][0]['programTag'] = program_tag
-	data['result'][0]['workspace'] = workspace
-	data['result'][0]['settings'] = settings
-	data['result'][0]['isAttribution'] = isAttribution
-	data['result'][0]['mode'] = mode
-	data['result'][0]['page'] = page
-	data['result'][0]['page_size'] = page_size
-	data['result'][0]['name'] = chartName
-	data['result'][0]['result'] = request.get_json(force=True)
+	if sidebar:
+		data['result'][0]['sidebar'] = sidebar
+	if tab_name:
+		data['result'][0]['tabName'] = tab_name
+	if top_view_metrics:
+		data['result'][0]['topViewMetrics'] = top_view_metrics
+	if time_period:
+		data['result'][0]['timePeriod'] = time_period
+	if mode:
+		data['result'][0]['mode'] = mode
+	if chartName:
+		data['result'][0]['name'] = chartName
+	
+	if abm_account_list:
+		data['result'][0]['abmAccountList'] = abm_account_list
+	else:
+		data['result'][0]['abmAccountList'] = None
+	if investment_period:
+		data['result'][0]['investmentPeriod'] = investment_period
+	else:
+		data['result'][0]['investmentPeriod'] = None
+	if opportunity_type:
+		data['result'][0]['opportunityType'] = opportunity_type
+	else:
+		data['result'][0]['opportunityType'] = None
+	if custom_attribute:
+		data['result'][0]['customAttribute'] = custom_attribute
+	else:
+		data['result'][0]['customAttribute'] = None
+	if program_tag:
+		data['result'][0]['programTag'] = program_tag
+	else:
+		data['result'][0]['programTag'] = None
+	if workspace:
+		data['result'][0]['workspace'] = workspace
+	else:
+		data['result'][0]['workspace'] = None
+	if settings:
+		data['result'][0]['settings'] = settings
+	else:
+		data['result'][0]['settings'] = None
+	
+	if isAttribution == 'true':
+		data['result'][0]['isAttribution'] = True
+	else:
+		data['result'][0]['isAttribution'] = False
+	
+	if page:
+		data['result'][0]['page'] = int(page)
+	if page_size:
+		data['result'][0]['page_size'] = int(page_size)
+	
+	if request.data:
+		data['result'][0]['result'] = request.get_json(force=True)
 	
 	# Returns the data as JSON
 	return json.dumps(data)

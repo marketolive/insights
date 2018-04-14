@@ -160,7 +160,7 @@ def ei_activate_dimension(dimension):
 
 @app.route('/ei/user/logout')
 def ei_logout():
-	return redirect('https://login.marketo.com/')
+	return redirect('https://app.marketo.com/')
 
 
 # Robots route set to disallow search engine indexing of all pages
