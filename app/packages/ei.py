@@ -189,23 +189,48 @@ def filter_data(endpoint, filters, data, sortByMetric=None):
 	
 	return data
 
-# Handles dimensions, metrics, user, kpis, allfilters, workspaces
+# Handles dimensions, metrics, user, allfilters, workspaces
 def get_data_info(request):
 	# Loads the appropriate JSON data file
 	path_split = request.path.rpartition('/')
 	endpoint = path_split[len(path_split) - 1]
 	jsonData = request.args.get('jsonData') or 'default'
 	
+	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	
+	# Returns the data as JSON
+	return json.dumps(data)
+
+def kpis(request):
+	# Loads the appropriate JSON data file
+	path_split = request.path.rpartition('/')
+	endpoint = path_split[len(path_split) - 1]
+	jsonData = request.args.get('jsonData') or 'default'
+	
+	# Required query string parameters
+	dateRange = request.args.get('dateRange')
+	isCompare = request.args.get('isCompare')
+	comparisonBenchmark = request.args.get('comparisonBenchmark')
+	
 	# Optional query string parameters
 	dimension = request.args.get('dimension')
+	
+	if not dateRange:
+		dateRange = dateRange_default
+	
+	if not isCompare:
+		isCompare = isCompare_default
+	
+	if not comparisonBenchmark:
+		comparisonBenchmark = comparisonBenchmark_default
 	
 	if dimension:
 		dimension	= json.loads(dimension)
 	
 	data = json.load(open(os.path.join(json_url, 'ei.' + jsonData + '.' + endpoint)))
+	data = data[dateRange][isCompare][comparisonBenchmark]
 	data = filter_data(endpoint, dimension, data)
 	
-	# Returns the data as JSON
 	return json.dumps(data)
 
 # Handles timeseries, breakdown

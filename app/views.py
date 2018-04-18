@@ -102,12 +102,15 @@ def ei_custom_page(jsonData):
 @app.route('/ei/metadata/dimensions.json')
 @app.route('/ei/metadata/metrics.json')
 @app.route('/ei/settings/user.json')
-@app.route('/ei/analytics/kpis.json')
 @app.route('/ei/settings/allfilters.json')
 @app.route('/ei/settings/workspaces.json')
 @app.route('/ei/settings/dimensions/custom.json')
 def ei_get_data_info():
 	return ei.get_data_info(request), None, json_resp_headers
+
+@app.route('/ei/analytics/kpis.json')
+def ei_kpis():
+	return ei.kpis(request), None, json_resp_headers
 
 @app.route('/ei/analytics/timeseries.json')
 @app.route('/ei/analytics/breakdown.json')
