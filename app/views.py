@@ -83,17 +83,14 @@ def mpi_save_quickchart():
 	return mpi.save_quickchart(request), None, json_resp_headers
 
 
-# Email Insights Old Home Page
-@app.route('/email')
-def ei_old_page():
-	return render_template('ei.old.html')
-
 # Email Insights Home Page
+@app.route('/email')
 @app.route('/email-insights')
 def ei_page():
 	return render_template('ei.html')
 
 # Email Insights Custom Page
+@app.route('/email/<jsonData>')
 @app.route('/email-insights/<jsonData>')
 def ei_custom_page(jsonData):
 	return render_template('ei.html')
