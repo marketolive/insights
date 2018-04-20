@@ -2890,7 +2890,7 @@
     m.replaceVariables)(t, r);
     
     let path_split = window.location.pathname.split('/'),
-    version='04202018v1',
+    version='04202018v2',
     jsonData;
     if ((path_split.length - 1) <= 1) {
       jsonData = 'default';
@@ -3180,7 +3180,7 @@
   b.quickcharts = M.quickcharts,
   b.saveQuickchart = function(e) {
     return M.saveQuickchart({
-      body: Object.assign({}, '', {
+      body: Object.assign({}, ''/*e*/, {
         quickchartId: e.id
       }),
       queryParams: {
@@ -3190,7 +3190,7 @@
   }
   ,
   b.deleteQuickchart = function(e) {
-    return M.deleteQuickchart(Object.assign({}, e, {
+    return M.deleteQuickchart(Object.assign({}, ''/*e*/, {
       quickchartId: e.id
     }))
   }
@@ -3203,7 +3203,7 @@
   ,
   b.createQuickchart = function(e, t, r, n) {
     return M.createQuickchart({
-      body: n ? n : "null",
+      body: "null",//n ? n : "null",
       queryParams: Object.assign(s(r.dateSelection), {
         chartName: e,
         chartType: t,
@@ -3310,9 +3310,9 @@
   path_split = window.location.pathname.split('/'),
   jsonData;
   if ((path_split.length - 1) <= 1) {
-    jsonData = '?jsonData=default&version=04202018v1';
+    jsonData = '?jsonData=default&version=04202018v2';
   } else {
-    jsonData = '?jsonData=' + path_split[2] + '&version=04202018v1';
+    jsonData = '?jsonData=' + path_split[2] + '&version=04202018v2';
   }
   export_api_url += jsonData;
   
