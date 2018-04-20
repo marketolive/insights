@@ -2767,7 +2767,7 @@
             "Content-Type": "text/html",
             Accept: "ArrayBuffer;"
           },
-          body: t.body
+          body: ''//t.body
         };
         return A(n, i).then(a).then(function(a) {
           return 200 === a.status ? (e && e.forEach(function(e) {
