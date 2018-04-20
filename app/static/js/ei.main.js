@@ -3180,7 +3180,7 @@
   b.quickcharts = M.quickcharts,
   b.saveQuickchart = function(e) {
     return M.saveQuickchart({
-      body: Object.assign({}, '', {
+      body: Object.assign({}, ''/*e*/, {
         quickchartId: e.id
       }),
       queryParams: {
@@ -3203,7 +3203,7 @@
   ,
   b.createQuickchart = function(e, t, r, n) {
     return M.createQuickchart({
-      body: n ? n : "null",
+      body: "null"//n ? n : "null",
       queryParams: Object.assign(s(r.dateSelection), {
         chartName: e,
         chartType: t,
