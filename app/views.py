@@ -83,17 +83,14 @@ def mpi_save_quickchart():
 	return mpi.save_quickchart(request), None, json_resp_headers
 
 
-# Email Insights Old Home Page
-@app.route('/email')
-def ei_old_page():
-	return render_template('ei.old.html')
-
 # Email Insights Home Page
+@app.route('/email')
 @app.route('/email-insights')
 def ei_page():
 	return render_template('ei.html')
 
 # Email Insights Custom Page
+@app.route('/email/<jsonData>')
 @app.route('/email-insights/<jsonData>')
 def ei_custom_page(jsonData):
 	return render_template('ei.html')
@@ -102,12 +99,15 @@ def ei_custom_page(jsonData):
 @app.route('/ei/metadata/dimensions.json')
 @app.route('/ei/metadata/metrics.json')
 @app.route('/ei/settings/user.json')
-@app.route('/ei/analytics/kpis.json')
 @app.route('/ei/settings/allfilters.json')
 @app.route('/ei/settings/workspaces.json')
 @app.route('/ei/settings/dimensions/custom.json')
 def ei_get_data_info():
 	return ei.get_data_info(request), None, json_resp_headers
+
+@app.route('/ei/analytics/kpis.json')
+def ei_kpis():
+	return ei.kpis(request), None, json_resp_headers
 
 @app.route('/ei/analytics/timeseries.json')
 @app.route('/ei/analytics/breakdown.json')
