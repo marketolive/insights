@@ -2767,7 +2767,7 @@
             "Content-Type": "text/html",
             Accept: "ArrayBuffer;"
           },
-          body: t.body
+          body: ''//t.body
         };
         return A(n, i).then(a).then(function(a) {
           return 200 === a.status ? (e && e.forEach(function(e) {
@@ -2890,7 +2890,7 @@
     m.replaceVariables)(t, r);
     
     let path_split = window.location.pathname.split('/'),
-    version='04182018v2',
+    version='04202018v1',
     jsonData;
     if ((path_split.length - 1) <= 1) {
       jsonData = 'default';
@@ -3310,9 +3310,9 @@
   path_split = window.location.pathname.split('/'),
   jsonData;
   if ((path_split.length - 1) <= 1) {
-    jsonData = '?jsonData=default&version=04182018v2';
+    jsonData = '?jsonData=default&version=04202018v1';
   } else {
-    jsonData = '?jsonData=' + path_split[2] + '&version=04182018v2';
+    jsonData = '?jsonData=' + path_split[2] + '&version=04202018v1';
   }
   export_api_url += jsonData;
   
