@@ -3203,7 +3203,7 @@
   ,
   b.createQuickchart = function(e, t, r, n) {
     return M.createQuickchart({
-      body: "null"//n ? n : "null",
+      body: "null",//n ? n : "null",
       queryParams: Object.assign(s(r.dateSelection), {
         chartName: e,
         chartType: t,
