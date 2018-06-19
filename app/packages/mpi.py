@@ -41,130 +41,294 @@ isAttribution_dict = {
 
 settings_dict = {
 	'Successes': {
-		None: 'n/a'
+		None: 'n/a',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}':'{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}':'{"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'New Names': {
-		None: 'n/a'
+		None: 'n/a',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}':'{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}':'{"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["New Opportunities"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Pipeline Created"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Pipeline Open"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Expected Revenue"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Cost Per Opportunity Created"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Pipeline Created to Cost Ratio"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["New Opportunities"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Pipeline Created"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Pipeline Open"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Expected Revenue"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Cost Per Opportunity Created"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Pipeline Created to Cost Ratio"]}': {
-		None: '{"Before Opportunity Created":[]}',
+		None: '{"Before Opportunity Created":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
 		'{"Before Opportunity Created":["Show First-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}',
-		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show First-Touch"]}'
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Created":["Show Multi-Touch"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Created":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Opportunities Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Revenue Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Cost Per Opportunity Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"First-Touch":["Revenue Won to Cost Ratio"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
 		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Opportunities Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
 		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Revenue Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
 		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Cost Per Opportunity Won"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
 		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	},
 	'{"Multi-Touch":["Revenue Won to Cost Ratio"]}': {
-		None: '{"Before Opportunity Closed":[]}',
+		None: '{"Before Opportunity Closed":["Show First-Touch"]}',
+		'{"previousPeriodConfig":["Calendar Previous Period"]}': '{"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"previousPeriodConfig":["YOY Previous Period"]}': '{"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
 		'{"Before Opportunity Closed":["Show First-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}',
-		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show First-Touch"]}'
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"]}': '{"Before Opportunity Closed":["Show Multi-Touch"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["Calendar Previous Period"]}',
+		'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch"],"previousPeriodConfig":["YOY Previous Period"]}',
+		'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}':'{"Before Opportunity Closed":["Show First-Touch","Show Multi-Touch"],"previousPeriodConfig":["YOY Previous Period"]}'
 	}
 }
 
