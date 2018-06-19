@@ -396,7 +396,10 @@ def get_data(request):
 	endpoint = path_split[len(path_split) - 1]
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
+	if endpoint == "getChannel.json":
+		data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + request.args.get('sidebar') + '.' + endpoint)))
+	else: 
+		data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
 	
 	# Required query string parameters
 	sidebar = request.args.get('sidebar')
@@ -424,7 +427,6 @@ def get_data(request):
 		time_period = 'YTD'
 	# Sets settings based upon the selected metric and setting as some settings have no effect on the data for the metric selected
 	settings = settings_dict[top_view_metrics][settings]
-	
 	data = data[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
 	
 	# User selected a set of channels to segment the data via post-filtering
@@ -452,7 +454,7 @@ def getProgram(request):
 	# Loads the appropriate JSON data file
 	jsonData = request.args.get('jsonData') or 'default'
 	
-	channelData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getChannel.json')))
+	channelData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + request.args.get('sidebar') + '.getChannel.json')))	
 	programData = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.getProgramRank.json')))
 	
 	# Required query string parameters
