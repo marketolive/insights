@@ -25,7 +25,8 @@
           var p = decodeURIComponent(url.substr(pos+5));
           document.getElementById('treeProgramName').innerText = p;
           if(p.length > 25)
-          document.getElementById('tabProgramName').innerText = p.substring(0,25)+'...';
+            p = p.substring(0,25)+'...';
+          document.getElementById('tabProgramName').innerText = p
         }
         $("#ext-comp-1207").css('left',(w-300)+'px');
         $("#ext-comp-1206").css('width',(w-300 - 15)+'px');
