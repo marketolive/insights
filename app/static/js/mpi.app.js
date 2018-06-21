@@ -2725,7 +2725,7 @@ webpackJsonp([0], {
 
           function a(e) {
               var t = E.getProperEntry(e);
-              return m.getMLMProgramURL(t.id)
+              return m.getMLMProgramURL(t.id, t.name);
           }
 
           function o(e) {
@@ -3206,7 +3206,7 @@ webpackJsonp([0], {
               if (i = a ? o.jjAppend("a") : o.jjAppend("p"), i.jjText(r).jjAddClass(S.default, "treeEntryNameP").jjAttr({
                       title: r
                   }), a) {
-                  var s = Q.getMLMProgramURL(a);
+                  var s = Q.getMLMProgramURL(a,r);
                   i.jjAddClass(S.default, "leafEntryNameLink").jjAttr({
                       href: s,
                       target: "_blank"
@@ -16982,8 +16982,8 @@ webpackJsonp([0], {
               return a && "$" == e.currencyChar ? r = "$" + r : a && (r += e.currencyChar), r
           }, this.getPieChartData = function() {
               return n
-          }, this.getMLMProgramURL = function(e) {//hunter here is the program linking
-              return t || (t = sessionStorage.getItem("metadataHostName")), "https://" + t + "/#PG" + e + "C3"
+          }, this.getMLMProgramURL = function(e,r) {//hunter here is the program linking
+              return t || (t = sessionStorage.getItem("metadataHostName")), location.origin + '/program?name='+encodeURIComponent(r)//"https://" + t + "/#PG" + e + "C3?name="+r
           }, this.setPieChartData = function(e) {
               n = e
           }, this.setMLMHostName = function(e) {

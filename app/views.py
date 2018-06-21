@@ -20,6 +20,11 @@ def home_page():
 def mpi_default_page():
 	return render_template('mpi.html')
 
+# MPI Program Page
+@app.route('/program')
+def program_default_page():
+	return render_template('program.html')
+
 # MPI Custom Page
 @app.route('/mpi/<jsonData>')
 @app.route('/performance-insights/<jsonData>')

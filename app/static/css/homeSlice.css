@@ -1,0 +1,341 @@
+/* the main class for each "block" on a home page */
+.homeBlock * {
+  position: relative;
+}
+.homeBlock {
+  position: absolute;
+  background-repeat: no-repeat;
+  width: 272px;
+  height: 151px;
+  color: #333;
+  padding: 10px;
+  background-image: url(/images/icons256/homeSliceBack171.png);
+}
+
+/* adjust block size */
+.halfBlock {
+  height: 63px;
+  background-image: url(/images/icons128/homeSliceBack.png);
+}
+
+/* adjust block size */
+.halfBlockHalfWidth {
+  padding: 10px;
+  width: 135px;
+  background-image: url(/images/icons128/homeSliceBackHalf.png);
+}
+
+
+/* adjust block size */
+.thirdBlock {
+  height: 105px;
+  background-image: url(/images/icons256/homeSliceBack125.png);
+}
+
+/* adjust block size */
+.thirdBlockShort {
+  height: 92px;
+  background-image: url(/images/icons256/homeSliceBack112.png);
+}
+
+/* alignment of full-size blocks */
+.homeTopLeft {
+  left:10px;
+  top:10px;
+}
+.homeTopRight {
+  left:378px;
+  top:10px;
+}
+.homeBottomLeft {
+  left:10px;
+  top:192px;
+}
+.homeBottomRight {
+  left:378px;
+  top:192px;
+}
+
+/* alignment of half-size blocks */
+.homeLeftThird1 {
+  left:10px;
+  top:10px;
+}
+.homeLeftThird2 {
+  left:10px;
+  top:140px;
+}
+.homeLeftThird3 {
+  left:10px;
+  top:270px;
+}
+
+/* alignment of half-size blocks */
+.homeRightThird1 {
+  left:310px;
+  top:10px;
+}
+.homeRightThird2 {
+  left:310px;
+  top:140px;
+}
+.homeRightThird3 {
+  left:310px;
+  top:270px;
+}
+/* alignment of half-size blocks */
+.homeLeftThirdShort1 {
+  left:10px;
+  top:10px;
+}
+.homeLeftThirdShort2 {
+  left:10px;
+  top:131px;
+}
+.homeLeftThirdShort3 {
+  left:10px;
+  top:252px;
+}
+
+/* alignment of half-size blocks */
+.homeLeftQuad1 {
+  left:10px;
+  top:10px;
+}
+.homeLeftQuad2 {
+  left:10px;
+  top:100px;
+}
+.homeLeftQuad3 {
+  left:10px;
+  top:190px;
+}
+.homeLeftQuad4 {
+  left:10px;
+  top:280px;
+}
+.homeLeftHalfQuad4 {
+  left:10px;
+  top:280px;
+}
+.homeRightHalfQuad4 {
+  left:156px;
+  top:280px;
+}
+.homeLeftQuad5 {
+  left:10px;
+  top:370px;
+}
+
+.homeBlockTall {
+  background-image: url(/images/icons256/HomeSlicesBack300x300.png);
+  width: 274px;
+}
+
+.homeBlockTall img.homeSlice.shifted-se {
+  background-position: 95% 69%;
+  height: 333px;
+}
+
+/* charts/grids */
+.homeBlockWide,
+.homeChart,
+.homeChartWide {
+  background-image: url(/images/icons256/homeSliceBack450.png);
+  width: 479px;
+  height: 430px;
+}
+.homeBlockWideLong {
+  background-image: url(/images/icons256/homeSliceBack545.png);
+  width: 463px;
+  height: 526px;
+}
+.homeChart,
+.homeChartWide {
+  left: 310px;
+}
+.homeGridBlock {
+  position: absolute;
+  background-repeat: no-repeat;
+  background-position: 120% -20px;
+}
+
+/* "homeslice" graphics */
+img.homeSlice {
+  position: absolute;
+  background-repeat: no-repeat;
+  top: 4px;
+  width: 98%;
+}
+.homeBlock img.homeSlice {
+  background-position: 57px -40px;
+  height: 161px;
+  right: 7px;
+}
+.halfBlock img.homeSlice {
+  background-position: 105% -20px;
+  height: 73px;
+  right: 7px;
+}
+.halfBlockHalfWidth img.homeSlice {
+  height: 73px;
+  width: 135px;
+  right: 16px;
+}
+.thirdBlock img.homeSlice {
+  height: 117px;
+  right: 7px;
+}
+.thirdBlockShort img.homeSlice {
+  background-position: 170px 2px;
+  height: 103px;
+  right: 7px;
+}
+.homeBlockWide img.homeSlice {
+  height: 450px;
+}
+.homeBlockWideLong img.homeSlice {
+  height: 546px;
+}
+
+img.homeSlice.shifted-w {
+  background-position: 90% 0px;
+}
+img.homeSlice.shifted-ne {
+  background-position: 120% -40px;
+}
+img.homeSlice.shifted-s {
+  background-position: 90% 0px;
+}
+img.homeSlice.shifted-se {
+  background-position: 120% 20px;
+}
+img.homeSlice.align-top-right {
+  background-position: 102% -1px;
+}
+img.homeSlice.badge {
+  background-position: 90% 60px;
+}
+.homeBlockWide img.homeSlice.shifted-se {
+  background-position: 342px 284px;
+}
+.homeBlockWideLong img.homeSlice.shifted-se {
+  background-position: 326px 380px;
+}
+
+/* text inside home blocks */
+/* field management */
+.homeFMFieldsHalf {background-image: url(/images/icons/calendar_preferences128.gif);}
+.homeFMFieldMappingHalf {background-image: url(/images/icons/environment_view128.gif);}
+.homeFMLayoutDesignerHalf {background-image: url(/images/icons/palette2_128.gif);}
+
+.homeBlock h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 0px;
+  padding: 0px;
+  color: #808080;
+}
+.homeBlock div {
+  color: #333;
+  font-size: 13px;
+  line-height:20px;
+}
+.halfBlock div {
+  margin-top: 4px;
+}
+.homeBlock ul {
+  padding: 15px;
+  list-style-type: circle;
+  font-size:13px;
+  line-height:20px;
+}
+
+.homeBlock .homeValue ul {
+  list-style-type: decimal;
+}
+
+/* IE-only fix for the numbered list layout on the home pages */
+body.ext-ie7 .homeBlock .homeValue ul {
+  margin-left: 24px; /* numbers gets cut off on ie7, adding extra margin should do it */
+}
+
+/* affordance of clickability */
+.homeNav,
+.homeNavHover {
+  cursor: pointer;
+}
+.homeNav:hover,
+.homeNavHover {
+  /* border: 1px solid #666666; */
+}
+.homeNav:hover h2,
+.homeNavHover h2 {
+  color: #d76f00;
+}
+
+img.homeSlice {
+  opacity: 0.2;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
+  filter: alpha(opacity=20);
+}
+.homeNav:hover img.homeSlice {
+  opacity: 0.3;
+  -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+  filter: alpha(opacity=30);
+}
+
+.scrollBlock {
+  height: 98%;
+  overflow: auto;
+  padding-top: 8px;
+}
+.homeLabel {
+  font-weight: bold;
+  color: #666;
+  float: left;
+  margin-left: 10px;
+  margin-top: 5px;
+  width: 120px;
+}
+.homeValue {
+  float: left;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+.homeValue ul {
+  padding: 0px;
+  margin-left: 20px;
+}
+.homeValue img {
+  top: 3px;
+  margin-right: 5px;
+}
+.homeClear {
+  clear: left;
+  height: 10px;
+}
+.shortHomeClear {
+  clear: left;
+  height: 0;
+}
+
+.mktHomeTable {
+}
+.mktHomeTable th,
+.mktHomeTable td {
+  font-size: 12px;
+  vertical-align: top;
+  padding: 10px 4px 4px 4px;
+  color: #333;
+}
+.mktHomeTable th {
+  white-space: nowrap;
+  padding-right: 30px;
+  font-weight: bold;
+}
+.mktHomeTable th a {
+  color: #333;
+}
+.mktHomeTable td {
+}
