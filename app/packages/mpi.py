@@ -401,6 +401,9 @@ def get_data(request):
 	else: 
 		data = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + endpoint)))
 	
+	if endpoint == "getProgramRank.json":
+		dataPR = json.load(open(os.path.join(json_url, 'mpi.' + jsonData + '.' + request.args.get('sidebar') + '.getChannel.json')))
+
 	# Required query string parameters
 	sidebar = request.args.get('sidebar')
 	tab_name = request.args.get('tab_name')
@@ -410,6 +413,7 @@ def get_data(request):
 	mode = request.args.get('mode')
 	settings = request.args.get('settings')
 	channel_id = request.args.get('channel_id')
+	channel_id2 = request.args.get('channel_id')
 	# Optional query string parameters
 	program_tag = request.args.get('program_tag')
 	workspace = request.args.get('workspace')
@@ -428,7 +432,7 @@ def get_data(request):
 	# Sets settings based upon the selected metric and setting as some settings have no effect on the data for the metric selected
 	settings = settings_dict[top_view_metrics][settings]
 	data = data[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
-	
+
 	# User selected a set of channels to segment the data via post-filtering
 	if channel_id:
 		channel_id = json.loads(channel_id)
@@ -447,7 +451,23 @@ def get_data(request):
 	if endpoint == 'getChannelTrend.json':
 		resp = populate_data('getChannelTrend.json', resp, 0.2, 0.2, 0.8, 100)
 	
-	# Returns the data as JSON
+	''' in getProgramRank the currentPeriod & previousPeriod determine the data in the center of the channel ring
+		but when you select a channel on the pie ring it will change the data in the middle and to get that we had to look at the getChannel data
+	'''
+	if endpoint == "getProgramRank.json":
+		curr = 0
+		prev = 0
+		dataPR = dataPR[sidebar][tab_name][top_view_metrics][isAttribution][time_period][settings]
+		if channel_id2:
+			for idx_channel, channel in enumerate(dataPR['channel']):
+				for idx_selChannel, selChannel in enumerate(channel_id):
+					if channel["id"] == selChannel:
+						curr += float(channel["metrics"][0]["value"])
+						prev += float(channel["metrics"][0]["previousPeriodValue"])
+		
+			resp["currentPeriod"] = curr
+			resp["previousPeriod"] = prev
+
 	return json.dumps(resp)
 
 def getProgram(request):
