@@ -20,6 +20,11 @@ def home_page():
 def mpi_default_page():
 	return render_template('mpi.html')
 
+# MPI Program Page
+@app.route('/program')
+def program_default_page():
+	return render_template('program.html')
+
 # MPI Custom Page
 @app.route('/mpi/<jsonData>')
 @app.route('/performance-insights/<jsonData>')
@@ -62,12 +67,12 @@ def mpi_quickcharts():
 def mpi_getUser():
 	return mpi.getUser(), None, json_resp_headers
 
-@app.route('/mpi/metadata/export.json')
+@app.route('/mpi/metadata/export.json', methods=['POST'])
 def mpi_export_ppt():
 	jsonData = request.args.get('jsonData') or 'default'
 	return app.send_static_file('export/mpi.' + jsonData + '.pptx')
 
-@app.route('/mpi/export/getExcelData.json')
+@app.route('/mpi/export/getExcel.json')
 def mpi_export_xls():
 	jsonData = request.args.get('jsonData') or 'default'
 	return app.send_static_file('export/mpi.' + jsonData + '.xlsx')
