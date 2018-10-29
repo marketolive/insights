@@ -3212,7 +3212,7 @@ webpackJsonp([0], {
             }
             function a(e) {
                 var t = D.getProperEntry(e);
-                return m.getMLMProgramURL(t.id)
+                return m.getMLMProgramURL(t.id, t.name)
             }
             function o(e) {
                 return D.getXAxisTickName(e)
@@ -3728,7 +3728,7 @@ webpackJsonp([0], {
                     title: r
                 }),
                 a) {
-                    var s = J.getMLMProgramURL(a);
+                    var s = J.getMLMProgramURL(a,r);
                     i.jjAddClass(S.default, "leafEntryNameLink").jjAttr({
                         href: s,
                         target: "_blank"
@@ -20358,7 +20358,7 @@ webpackJsonp([0], {
                 return n
             }
             ,
-            this.getMLMProgramURL = function(e) {
+            this.getMLMProgramURL = function(e,r) {
                 return t || (t = sessionStorage.getItem("metadataHostName")), location.origin + '/program?name='+encodeURIComponent(r)//hunter "https://" + t + "/#PG" + e + "C3?name="+r
             }
             ,
