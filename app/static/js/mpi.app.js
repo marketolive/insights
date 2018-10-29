@@ -16983,7 +16983,7 @@ webpackJsonp([0], {
           }, this.getPieChartData = function() {
               return n
           }, this.getMLMProgramURL = function(e,r) {//hunter here is the program linking
-              return t || (t = sessionStorage.getItem("metadataHostName")), location.origin + '/program?name='+encodeURIComponent(t)//"https://" + t + "/#PG" + e + "C3?name="+r
+              return t || (t = sessionStorage.getItem("metadataHostName")), location.origin + '/program?name='+encodeURIComponent(r)//"https://" + t + "/#PG" + e + "C3?name="+r
           }, this.setPieChartData = function(e) {
               n = e
           }, this.setMLMHostName = function(e) {
