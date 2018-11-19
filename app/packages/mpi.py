@@ -389,8 +389,9 @@ def get_data(request):
 	abm_account_list = request.args.get('abm_account_list')
 	custom_attribute = request.args.get('custom_attribute')
 	investment_period = request.args.get('investment_period')
-	opportunity_type = request.args.get('opportunity_type')
-	filters = [program_tag, workspace, abm_account_list, custom_attribute, investment_period, opportunity_type]
+	opportunity_type = request.args.get('opportunity_type') #think this is not needed but need to check since Q3 2018
+	opportunity = request.args.get('opportunity') #came in Q3 2018
+	filters = [program_tag, workspace, abm_account_list, custom_attribute, investment_period, opportunity_type, opportunity]
 	
 	# If the isAttribution selected has no effect on the data for metric selected
 	if isAttribution not in isAttribution_dict[top_view_metrics]:
@@ -680,6 +681,7 @@ def save_quickchart(request):
 	custom_attribute = request.args.get('custom_attribute')
 	investment_period = request.args.get('investment_period')
 	opportunity_type = request.args.get('opportunity_type')
+	opportunity = request.args.get('opportunity')
 	settings = request.args.get('settings')
 	
 	if sidebar:
@@ -707,6 +709,10 @@ def save_quickchart(request):
 		data['result'][0]['opportunityType'] = opportunity_type
 	else:
 		data['result'][0]['opportunityType'] = None
+	if opportunity: #Q3 2018
+		data['result'][0]['opportunity'] = opportunity
+	else:
+		data['result'][0]['opportunity'] = None
 	if custom_attribute:
 		data['result'][0]['customAttribute'] = custom_attribute
 	else:
