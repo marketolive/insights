@@ -11,5 +11,14 @@
         "Services",
         "Upsell",
         "Upsell/Crossell"
+    ],
+    "opportunity_owner_name":[
+        "John",
+        "Jane",
+        "Rob",
+        "Paul",
+        "Hunter",
+        "Stephen",
+        "Jessica"
     ]
 }
