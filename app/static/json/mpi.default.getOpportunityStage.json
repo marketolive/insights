@@ -2,9 +2,9 @@
     "success": "true",
     "count": "4",
     "opportunity_stage": [
-       "Test 1",
-       "Test 2",
-       "Test 3",
-       "Test 4"
+       "Prospecting",
+       "Value Proposition",
+       "Proposal/Price Quote",
+       "Negotiation/Review"
     ]
 }
