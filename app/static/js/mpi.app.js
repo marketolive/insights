@@ -17384,17 +17384,25 @@ webpackJsonp([0], {
                                 return o.next = 62,
                                 Be.default.getFilterFirstLevelValues("getOpportunityField", d);
                             case 60:
-                                p = o.sent,
-                                f = p.forecast_category;
+                                return p = o.sent,
+                                f = p.forecast_category,
+                                o.next = 64;
                             case 61:
-                                p = o.sent,
-                                f = p.opportunity_owner_name;
+                                return p = o.sent,
+                                f = p.opportunity_owner_name,
+                                o.next = 64;
                             case 62:
-                                p = o.sent,
-                                f = p.opportunity_field;
+                                return p = o.sent,
+                                f = p.opportunity_field,
+                                o.next = 64;
                             case 63:
-                                p = o.sent,
-                                f = p.stage;
+                                return p = o.sent,
+                                f = p.stage,
+                                o.next = 64;
+                            case 65:
+                                return p = o.sent,
+                                f = p.type,
+                                o.next = 64;
                             case 64:
                                 h = p.count,
                                 a(f, h)
