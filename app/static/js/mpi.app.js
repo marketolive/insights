@@ -17397,11 +17397,11 @@ webpackJsonp([0], {
                                 o.next = 64;
                             case 63:
                                 return p = o.sent,
-                                f = p.stage,
+                                f = p.opportunity_stage,
                                 o.next = 64;
                             case 65:
                                 return p = o.sent,
-                                f = p.type,
+                                f = p.opportunity_type,
                                 o.next = 64;
                             case 64:
                                 h = p.count,
