@@ -21907,10 +21907,10 @@ webpackJsonp([0], {
                     var t = void 0;
                     switch (e) {
                     case "Opportunity Type":
-                        t = "type";
+                        t = "opportunity_type";
                         break;
                     case "Opportunity Stage":
-                        t = "stage";
+                        t = "opportunity_stage";
                         break;
                     case "Opportunity Owner":
                         t = "opportunity_owner_name";
