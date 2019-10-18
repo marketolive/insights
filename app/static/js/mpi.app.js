@@ -1054,6 +1054,10 @@ webpackJsonp([0], {
             getProgramTrends: "metadata/getProgramTrend.json",
             getWorkspace: "metadata/getWorkspace.json",
             getOpportunityField: "metadata/getOpportunityField.json",
+            getOpportunityForecast: "metadata/getOpportunityForecast.json",
+            getOpportunityOwner: "metadata/getOpportunityOwner.json",
+            getOpportunityStage: "metadata/getOpportunityStage.json",
+            getOpportunityType: "metadata/getOpportunityType.json",
             getAbmAccountList: "metadata/getAbmAccountList.json",
             getAbmAccountName: "metadata/getAbmAccountName.json",
             getProgramTagName: "metadata/getProgramTagName.json",
@@ -17361,15 +17365,43 @@ webpackJsonp([0], {
                                     o.next = 64;
                                     break
                                 }
+                                if(l.name === "Opportunity Forecast Category"){
+                                    return o.next = 60,
+                                    Be.default.getFilterFirstLevelValues("getOpportunityForecast", d);
+                                }
+                                else if(l.name === "Opportunity Owner"){
+                                    return o.next = 61,
+                                    Be.default.getFilterFirstLevelValues("getOpportunityOwner", d);
+                                }
+                                else if(l.name === "Opportunity Stage"){
+                                    return o.next = 63,
+                                    Be.default.getFilterFirstLevelValues("getOpportunityStage", d);
+                                }
+                                else if(l.name === "Opportunity Type"){
+                                    return o.next = 65,
+                                    Be.default.getFilterFirstLevelValues("getOpportunityType", d);
+                                }
                                 return o.next = 62,
                                 Be.default.getFilterFirstLevelValues("getOpportunityField", d);
+                            case 60:
+                                p = o.sent,
+                                f = p.forecast_category;
+                            case 61:
+                                p = o.sent,
+                                f = p.opportunity_owner_name;
                             case 62:
                                 p = o.sent,
                                 f = p.opportunity_field;
+                            case 63:
+                                p = o.sent,
+                                f = p.stage;
                             case 64:
                                 h = p.count,
-                                a(f, h),
+                                a(f, h)
                                 s(Le.resetFilterMode());
+                             case 65:
+                                p = o.sent,
+                                f = p.type;
                             case 67:
                             case "end":
                                 return o.stop()
