@@ -51,6 +51,9 @@ def mpi_getProgramTrend():
 @app.route('/mpi/metadata/getAbmAccountList.json')
 @app.route('/mpi/metadata/getAbmAccountName.json')
 @app.route('/mpi/metadata/getCustomAttributeName.json')
+@app.route('/mpi/metadata/getOpportunityForecast.json')
+@app.route('/mpi/metadata/getOpportunityOwner.json')
+@app.route('/mpi/metadata/getOpportunityStage.json')
 @app.route('/mpi/metadata/getOpportunityType.json')
 @app.route('/mpi/metadata/getOpportunityField.json')
 def mpi_get_filter_names():
