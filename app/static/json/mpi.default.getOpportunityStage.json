@@ -1,0 +1,10 @@
+{
+    "success": "true",
+    "count": "4",
+    "opportunity_stage": [
+       "Prospecting",
+       "Value Proposition",
+       "Proposal/Price Quote",
+       "Negotiation/Review"
+    ]
+}

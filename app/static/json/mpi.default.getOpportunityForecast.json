@@ -1,0 +1,10 @@
+{
+    "success": "true",
+    "count": "4",
+    "forecast_category": [
+        "Pipeline",
+        "Best Case",
+        "Commit",
+        "Omitted"
+    ]
+}
