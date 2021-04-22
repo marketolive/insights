@@ -1,0 +1,10 @@
+version: '3.7'
+services:
+  python:
+    build: .
+    container_name: mpi
+    ports:
+      - "5000:5000"
+      - "5678:5678"
+    env:
+      - PYTHONUNBUFFERED 1
