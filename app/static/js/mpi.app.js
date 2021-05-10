@@ -25867,7 +25867,7 @@ webpackJsonp([0], {
                         selected: !1
                     }, {
                         color: "#FFC765",
-                        name: "Email - Sponsored",
+                        name: "SMS",
                         change: 2.7817119108538924,
                         value: .46932304301299155,
                         format: "",
@@ -26001,7 +26001,7 @@ webpackJsonp([0], {
                         color: "#FCE57F"
                     }, {
                         id: "350",
-                        name: "Email - Sponsored",
+                        name: "SMS",
                         selected: !1,
                         value: 2.6094807802001014,
                         change: 34.737738847110435,
@@ -26120,7 +26120,7 @@ webpackJsonp([0], {
                         color: "#FCE57F"
                     }, {
                         id: "350",
-                        name: "Email - Sponsored",
+                        name: "SMS",
                         selected: !1,
                         value: 2.6094807802001014,
                         change: 34.737738847110435,
